@@ -1,0 +1,45 @@
+services:
+  # ========================================================
+  # Sanjeevini Backend API (FastAPI)
+  # ========================================================
+  - type: web
+    name: sanjeevini-backend
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/analytics/national-summary
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DATABASE_URL
+        value: sqlite:///./sanjeevani.db
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash
+      - key: BIGQUERY_DATASET
+        value: hmis_national_health
+
+  # ========================================================
+  # Sanjeevini Frontend Web App (React 18 + Vite SPA)
+  # ========================================================
+  - type: web
+    name: sanjeevini-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://sanjeevini-backend.onrender.com/api/v1
