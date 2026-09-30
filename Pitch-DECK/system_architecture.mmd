@@ -1,0 +1,54 @@
+flowchart TD
+    subgraph "Clients & Frontline Field Workers"
+        ASHA["ASHA / ANM Frontline Cadre (Voice / Mobile PWA)"]
+        PHC["PHC Pharmacist / Medical Officer (Ground Console)"]
+        DMO["District Health Officer (Redistribution Hub)"]
+        MoHFW["National MoHFW Command Deck"]
+    end
+
+    subgraph "Presentation Layer (React 18 + TS + Leaflet)"
+        UI["Vite SPA with Glassmorphism Design System"]
+        GIS["Leaflet GIS Heatmap & Cluster Engine"]
+        VoiceUI["Web Speech & Indic Audio Processor"]
+        CameraUI["Camera / File Upload OCR Component"]
+    end
+
+    subgraph "API & Business Logic (FastAPI)"
+        API["FastAPI 0.111 Core Service"]
+        ForecastingService["Vertex AI & Epidemiological Demand Engine"]
+        RedistributionService["Cost-Distance-Expiry Matching Algorithm"]
+        FederatedCoordinator["FedAvg Multi-State Aggregator"]
+        MultimodalService["Gemini 1.5 Flash Vision OCR Extractor"]
+    end
+
+    subgraph "AI & Cloud Integrations"
+        Gemini["Google Gemini 1.5 Flash / Pro"]
+        Vertex["Vertex AI Time-Series Forecaster"]
+        STT["Google Cloud Speech-to-Text & TTS"]
+        Translation["Google Cloud Translation API"]
+        BigQuery["Google BigQuery (HMIS & IDSP Data Bridge)"]
+    end
+
+    subgraph "Storage & Caching"
+        DB[("SQLite (Dev) / Cloud SQL PostgreSQL (Prod)")]
+        RedisStore[("Redis Queue & Rate Limiter")]
+    end
+
+    ASHA -->|Voice Recording in Hindi/Marathi/Tamil| VoiceUI
+    PHC -->|Ledger Photo| CameraUI
+    DMO -->|Approve e-Challan| UI
+    MoHFW -->|Monitor National Resilience| UI
+
+    VoiceUI --> API
+    CameraUI --> API
+    UI --> API
+    GIS --> API
+
+    API --> Gemini
+    API --> Vertex
+    API --> STT
+    API --> Translation
+    API --> BigQuery
+
+    API --> DB
+    API --> RedisStore

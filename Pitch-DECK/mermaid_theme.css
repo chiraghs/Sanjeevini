@@ -1,0 +1,54 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+.cluster rect {
+  fill: #f8fafc !important;
+  stroke: #94a3b8 !important;
+  stroke-width: 1.5px !important;
+  rx: 10px !important;
+  ry: 10px !important;
+}
+
+.cluster .nodeLabel {
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  fill: #1e3a8a !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.node rect, .node circle, .node ellipse, .node polygon, .node path {
+  fill: #ffffff !important;
+  stroke: #2563eb !important;
+  stroke-width: 1.5px !important;
+  rx: 8px !important;
+  ry: 8px !important;
+}
+
+.node .label {
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  color: #0f172a !important;
+  fill: #0f172a !important;
+}
+
+.edgePath path {
+  stroke: #2563eb !important;
+  stroke-width: 2px !important;
+}
+
+.edgeLabel {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #059669 !important;
+}
+
+.marker {
+  fill: #2563eb !important;
+  stroke: #2563eb !important;
+}
