@@ -39,7 +39,7 @@ export const LiveResourceMap: React.FC = () => {
   
   // Map Engine State: CARTO Positron (Default Light), Voyager, Dark Matter, OSM, or Google Maps
   const [mapEngine, setMapEngine] = useState<'carto_positron' | 'carto_voyager' | 'carto_dark' | 'osm' | 'google_roadmap' | 'google_satellite'>(() => {
-    return (localStorage.getItem('map_engine') as any) || 'carto_positron';
+    return (localStorage.getItem('map_engine') as any) || 'osm';
   });
   const [googleMapsKey, setGoogleMapsKey] = useState<string>(() => {
     return localStorage.getItem('google_maps_key') || (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY || '';

@@ -31,7 +31,7 @@
       page-break-after: always;
       position: relative;
       background: #ffffff;
-      padding: 60px 80px 45px 80px;
+      padding: 55px 75px 40px 75px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -56,7 +56,7 @@
     }
 
     .header-bar {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .category-badge {
@@ -66,12 +66,12 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--forest);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .slide-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 38px;
+      font-size: 36px;
       font-weight: 700;
       color: var(--dark);
       letter-spacing: -0.02em;
@@ -80,7 +80,7 @@
     .content-area {
       flex: 1;
       display: flex;
-      gap: 40px;
+      gap: 32px;
       position: relative;
     }
 
@@ -89,7 +89,7 @@
       justify-content: space-between;
       align-items: center;
       border-top: 1px solid var(--card-border);
-      padding-top: 14px;
+      padding-top: 12px;
       font-size: 13px;
       color: var(--muted);
       font-weight: 500;
@@ -100,31 +100,31 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 26px 22px;
+      padding: 22px 20px;
       display: flex;
       flex-direction: column;
       box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
     .card-tag {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .card-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--dark);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .card-body {
-      font-size: 15.5px;
-      line-height: 1.6;
+      font-size: 14.5px;
+      line-height: 1.55;
       color: #334155;
     }
 
@@ -199,7 +199,8 @@
       <div style="display: flex; gap: 14px; flex-wrap: wrap;">
         <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">⚡ Google Cloud Run Microservices</span>
         <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🧠 Gemini 1.5 Flash Reasoning</span>
-        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🗺️ CARTO & OSM GIS Engines</span>
+        <!-- Note: Just Include GIS Engines as requested -->
+        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🗺️ GIS Engines</span>
         <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🗣️ 22 Scheduled Indian Languages</span>
         <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🔒 Sovereign FedAvg Model Synthesis</span>
       </div>
@@ -211,7 +212,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 2: THE PROBLEM -->
+  <!-- SLIDE 2: THE PROBLEM (WITH IMAGES IN EACH BOX) -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">THE CHALLENGE & PUBLIC HEALTH CRISIS</div>
@@ -219,30 +220,48 @@
     </div>
 
     <div class="content-area">
-      <div class="card" style="flex: 1; background: #fef2f2; border-color: #fecaca;">
-        <div class="card-tag" style="color: #dc2626;">42% RECURRENT DEFICITS</div>
-        <div class="card-title">Chronic Medicine Stock-Outs</div>
-        <div class="card-body">
-          <p style="margin-bottom: 14px;"><strong>Zero Automated Surge Warnings:</strong> Essential emergency drugs (Paracetamol, ORS, Anti-Snake Venom, Oxytocin) run out during acute seasonal disease surges.</p>
-          <p><strong>The Proximity Paradox:</strong> Excess medicine stockpiles sit expiring in central district warehouses just 40 km away, while rural sub-centres are forced to turn away critical fever and maternal emergencies.</p>
+      <!-- Col 1 -->
+      <div class="card" style="flex: 1; background: #fef2f2; border-color: #fecaca; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #dc2626;">42% RECURRENT DEFICITS</div>
+          <div class="card-title">Chronic Medicine Stock-Outs</div>
+          <div class="card-body">
+            <p style="margin-bottom: 10px;"><strong>Zero Automated Surge Warnings:</strong> Essential emergency drugs (Paracetamol, ORS, Anti-Snake Venom, Oxytocin) run out during acute seasonal disease surges.</p>
+            <p><strong>The Proximity Paradox:</strong> Excess medicine stockpiles sit expiring in central district warehouses just 40 km away, while rural sub-centres are forced to turn away critical fever and maternal emergencies.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 14px;">
+          <img src="screenshots/p2_col1_stockout.png" alt="Critical Medicine Stockout" style="width: 100%; display: block;">
         </div>
       </div>
 
-      <div class="card" style="flex: 1;">
-        <div class="card-tag" style="color: #d97706;">12 - 24 HOUR REPORTING LAG</div>
-        <div class="card-title">Manual Ledgers & Data Invisibility</div>
-        <div class="card-body">
-          <p style="margin-bottom: 14px;"><strong>Frontline Cadre Burden:</strong> Over 1,000,000 ASHA and ANM healthcare workers lose 2 to 3 hours every day manually compiling paper ledgers instead of delivering patient care.</p>
-          <p><strong>Latency Blindspots:</strong> Legacy batch databases update only once every 24 hours. Critical outbreak signals during monsoons remain hidden until facilities run out completely.</p>
+      <!-- Col 2 -->
+      <div class="card" style="flex: 1; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #d97706;">12 - 24 HOUR REPORTING LAG</div>
+          <div class="card-title">Manual Ledgers & Data Invisibility</div>
+          <div class="card-body">
+            <p style="margin-bottom: 10px;"><strong>Frontline Cadre Burden:</strong> Over 1,000,000 ASHA and ANM healthcare workers lose 2 to 3 hours every day manually compiling paper ledgers instead of delivering patient care.</p>
+            <p><strong>Latency Blindspots:</strong> Legacy batch databases update only once every 24 hours. Critical outbreak signals during monsoons remain hidden until facilities run out completely.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 14px;">
+          <img src="screenshots/p2_col2_ledger.png" alt="Paper Ledger OCR Scan" style="width: 100%; display: block;">
         </div>
       </div>
 
-      <div class="card" style="flex: 1;">
-        <div class="card-tag" style="color: #1e40af;">DATA SOVEREIGNTY BARRIERS</div>
-        <div class="card-title">Interstate Data Silos & DPDP Friction</div>
-        <div class="card-body">
-          <p style="margin-bottom: 14px;"><strong>Compliance Constraints:</strong> Under India’s Digital Personal Data Protection (DPDP) Act 2023, patient health records cannot be pooled into a monolithic central repository.</p>
-          <p><strong>Isolated Prediction Models:</strong> States cannot share local epidemiological trends or coordinate cross-border emergency replenishment without severe privacy risks.</p>
+      <!-- Col 3 -->
+      <div class="card" style="flex: 1; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #1e40af;">DATA SOVEREIGNTY BARRIERS</div>
+          <div class="card-title">Interstate Data Silos & DPDP Friction</div>
+          <div class="card-body">
+            <p style="margin-bottom: 10px;"><strong>Compliance Constraints:</strong> Under India’s Digital Personal Data Protection (DPDP) Act 2023, patient health records cannot be pooled into a monolithic central repository.</p>
+            <p><strong>Isolated Prediction Models:</strong> States cannot share local epidemiological trends or coordinate cross-border emergency replenishment without severe privacy risks.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 14px;">
+          <img src="screenshots/p2_col3_silos.png" alt="Federated State Data Nodes" style="width: 100%; display: block;">
         </div>
       </div>
     </div>
@@ -253,7 +272,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 3: SOLUTION ARCHITECTURE (4 PILLARS) -->
+  <!-- SLIDE 3: SOLUTION ARCHITECTURE (4 PILLARS WITH IMAGES) -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">HOLISTIC PLATFORM STRATEGY</div>
@@ -261,43 +280,67 @@
     </div>
 
     <div class="content-area">
-      <div class="card" style="flex: 1; background: #ecfdf5; border-color: #a7f3d0;">
-        <div class="card-tag" style="color: #059669;">PILLAR 1</div>
-        <div class="card-title">Multimodal Ground Capture</div>
-        <div class="card-body">
-          <p style="margin-bottom: 12px;">• <strong>Indic Voice AI:</strong> Hands-free voice reporting across all 22 official scheduled Indian languages + English.</p>
-          <p style="margin-bottom: 12px;">• <strong>Gemini Vision Scanner:</strong> Instantly reads medicine packaging, batch barcodes, and handwritten ledgers.</p>
-          <p>• <strong>Zero Typing:</strong> Tailored for field workers.</p>
+      <!-- Pillar 1 -->
+      <div class="card" style="flex: 1; background: #ecfdf5; border-color: #a7f3d0; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #059669;">PILLAR 1</div>
+          <div class="card-title">Ground Capture</div>
+          <div class="card-body">
+            <p style="margin-bottom: 8px;">• <strong>Indic Voice AI:</strong> Hands-free reporting in 22 Indian languages.</p>
+            <p style="margin-bottom: 8px;">• <strong>Gemini Vision:</strong> Instant OCR for ledgers & blister packs.</p>
+            <p>• <strong>Zero Typing:</strong> Tailored for rural ASHA/ANM cadres.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 10px;">
+          <img src="screenshots/p3_col1_voice.png" alt="Voice Assistant" style="width: 100%; display: block;">
         </div>
       </div>
 
-      <div class="card" style="flex: 1; background: #eff6ff; border-color: #bfdbfe;">
-        <div class="card-tag" style="color: #1e40af;">PILLAR 2</div>
-        <div class="card-title">Real-Time GIS Surveillance</div>
-        <div class="card-body">
-          <p style="margin-bottom: 12px;">• <strong>National Grid:</strong> Live tracking across 31,000+ PHCs and Sub-Centres.</p>
-          <p style="margin-bottom: 12px;">• <strong>CARTO Positron Engine:</strong> High-legibility civic light maps.</p>
-          <p>• <strong>Buffer Thresholds:</strong><br>🟢 Stable (&gt;7 Days)<br>🟡 Warning (4–7 Days)<br>🔴 Critical Deficit (≤3 Days).</p>
+      <!-- Pillar 2 -->
+      <div class="card" style="flex: 1; background: #eff6ff; border-color: #bfdbfe; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #1e40af;">PILLAR 2</div>
+          <div class="card-title">GIS Surveillance</div>
+          <div class="card-body">
+            <p style="margin-bottom: 8px;">• <strong>National Grid:</strong> Live tracking across 31,000+ PHCs.</p>
+            <p style="margin-bottom: 8px;">• <strong>High-Precision Mapping:</strong> OSM & Google engines.</p>
+            <p>• <strong>Buffer Alerts:</strong> 🟢 Stable, 🟡 Warning, 🔴 Critical.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 10px;">
+          <img src="screenshots/p3_col2_map.png" alt="GIS Resource Map" style="width: 100%; display: block;">
         </div>
       </div>
 
-      <div class="card" style="flex: 1;">
-        <div class="card-tag" style="color: #d97706;">PILLAR 3</div>
-        <div class="card-title">Predictive Surge Balancing</div>
-        <div class="card-body">
-          <p style="margin-bottom: 12px;">• <strong>7-Day Early Warnings:</strong> ML forecasts disease surges before stock is exhausted.</p>
-          <p style="margin-bottom: 12px;">• <strong>Algorithmic Pairing:</strong> Matches donor facilities (&gt;14d buffer) with deficit clinics (≤3d buffer).</p>
-          <p>• <strong>Automated Logistics:</strong> Turnkey digital transfer manifests with route guidance.</p>
+      <!-- Pillar 3 -->
+      <div class="card" style="flex: 1; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #d97706;">PILLAR 3</div>
+          <div class="card-title">Predictive Logistics</div>
+          <div class="card-body">
+            <p style="margin-bottom: 8px;">• <strong>7-Day Early Warnings:</strong> ML forecasts surge spikes.</p>
+            <p style="margin-bottom: 8px;">• <strong>Automated Pairing:</strong> Matches surplus with deficits.</p>
+            <p>• <strong>Turnkey e-Challan:</strong> Manifests with cold-chain routes.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 10px;">
+          <img src="screenshots/p3_col3_logistics.png" alt="Predictive Logistics Redistribution" style="width: 100%; display: block;">
         </div>
       </div>
 
-      <div class="card" style="flex: 1;">
-        <div class="card-tag" style="color: #4f46e5;">PILLAR 4</div>
-        <div class="card-title">Sovereign Federated AI</div>
-        <div class="card-body">
-          <p style="margin-bottom: 12px;">• <strong>Local State Training:</strong> State servers train ML models locally behind state firewalls.</p>
-          <p style="margin-bottom: 12px;">• <strong>Weight Aggregation (FedAvg):</strong> Only mathematical gradients are shared centrally.</p>
-          <p>• <strong>+34.2% Accuracy Boost</strong> without centralizing raw citizen records.</p>
+      <!-- Pillar 4 -->
+      <div class="card" style="flex: 1; justify-content: space-between;">
+        <div>
+          <div class="card-tag" style="color: #4f46e5;">PILLAR 4</div>
+          <div class="card-title">Sovereign Federated AI</div>
+          <div class="card-body">
+            <p style="margin-bottom: 8px;">• <strong>Local Training:</strong> State models train behind firewalls.</p>
+            <p style="margin-bottom: 8px;">• <strong>FedAvg Synthesis:</strong> Gradients aggregated centrally.</p>
+            <p>• <strong>+34.2% Boost:</strong> Shared national AI with 0 data leaks.</p>
+          </div>
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 10px;">
+          <img src="screenshots/p3_col4_federated.png" alt="Federated Convergence" style="width: 100%; display: block;">
         </div>
       </div>
     </div>
@@ -308,7 +351,7 @@
     </div>
   </div>
 
-  <!-- SLIDE 4: SYSTEM ARCHITECTURE (FROM README.MD) -->
+  <!-- SLIDE 4: SYSTEM ARCHITECTURE (FROM README.MD - CARTO REMOVED) -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">5-TIER CLOUD & EDGE INFRASTRUCTURE (FROM README)</div>
@@ -328,14 +371,14 @@
         </div>
       </div>
 
-      <!-- Tier 2 -->
+      <!-- Tier 2 - CARTO removed -->
       <div class="arch-layer-card" style="background: #eff6ff; border-color: #bfdbfe;">
         <div class="arch-layer-badge" style="color: #1e40af;">
           2. Presentation Layer
         </div>
         <div class="arch-layer-items">
           • Vite Single Page Application (React 18 + TypeScript + Responsive Mobile Shell)<br>
-          • CARTO Positron & Leaflet GIS Heatmap & Outbreak Cluster Engine<br>
+          • Leaflet & Dual GIS Heatmap Engine (OpenStreetMap & Google Maps)<br>
           • Web Speech & 22 Indic Audio Processors  •  Camera / Ledger OCR Canvas Component
         </div>
       </div>
@@ -411,11 +454,11 @@
     </div>
   </div>
 
-  <!-- SLIDE 6: NATIONAL COMMAND & GIS MAP -->
+  <!-- SLIDE 6: NATIONAL COMMAND & LIVE GIS MAP (NON-CARTO SCREENSHOT) -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">REAL-TIME OPERATIONAL INTELLIGENCE</div>
-      <div class="slide-title">National Command Center & CARTO GIS Surveillance</div>
+      <div class="slide-title">National Command Center & High-Precision GIS Surveillance</div>
     </div>
 
     <div class="content-area">
@@ -427,7 +470,7 @@
           <li style="margin-bottom: 12px;"><strong>Continuous PHC Tracking:</strong> Telemetry streams monitor drug buffer days, emergency bed occupancy, and medical staff attendance across 31,000+ facilities.</li>
           <li style="margin-bottom: 12px;"><strong>Epidemic Heat Zones:</strong> Real-time geofenced cluster circles identify emerging flood cholera outbreaks (e.g. Cachar flood zone) and vector-borne dengue hotspots (e.g. Pune cluster).</li>
           <li style="margin-bottom: 12px;"><strong>Role-Based Governance:</strong> Seamless one-click view switching for Union MoHFW, State Health Directors, District Health Officers (DHOs), and Ground PHCs.</li>
-          <li><strong>Integrated Multi-Engine GIS:</strong> Native toggle between CARTO Positron (clean light), CARTO Voyager, CARTO Dark Matter, OSM, and Google Maps.</li>
+          <li><strong>Integrated Multi-Engine GIS:</strong> Native toggle between OpenStreetMap Standard, Google Maps Platform, and High-Performance GIS Layers.</li>
         </ul>
       </div>
 
@@ -436,7 +479,7 @@
           <img src="screenshots/national_command.png" alt="National Command Center">
         </div>
         <div class="screenshot-frame">
-          <img src="screenshots/live_map.png" alt="Live Resource Map">
+          <img src="screenshots/live_map.png" alt="Live Resource Map (OSM)">
         </div>
       </div>
     </div>
@@ -548,11 +591,11 @@
     </div>
   </div>
 
-  <!-- SLIDE 10: MOBILE SIMULATOR -->
+  <!-- SLIDE 10: MOBILE SIMULATOR (WITH SMS/WHATSAPP/TELEGRAM POINT) -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">EXTREME ENVIRONMENT RESILIENCE</div>
-      <div class="slide-title">Frontline Mobile Simulator: Offline Queue & Sync Mode</div>
+      <div class="slide-title">Frontline Mobile Simulator: Offline Queue & Multi-Channel Sync</div>
     </div>
 
     <div class="content-area">
@@ -560,10 +603,11 @@
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 16px;">
           Engineered for Connectivity-Deprived Rural & Tribal Belts
         </h3>
-        <ul style="font-size: 16px; line-height: 1.7; color: #334155; padding-left: 20px; margin-bottom: 24px;">
-          <li style="margin-bottom: 12px;"><strong>Zero-Connectivity Operation:</strong> In deep tribal villages and flood disaster zones where mobile networks fail, the app allows full offline stock adjustments, voice notes, and SOS alerts.</li>
-          <li style="margin-bottom: 12px;"><strong>Local SQLite Transaction Queue:</strong> Every field action is queued locally with cryptographic timestamps and offline state persistence.</li>
-          <li style="margin-bottom: 12px;"><strong>Automatic Cloud Synchronization:</strong> The instant cellular connectivity (2G/3G/4G/WiFi) is restored, the offline queue syncs seamlessly with cloud servers without data loss.</li>
+        <ul style="font-size: 15px; line-height: 1.65; color: #334155; padding-left: 20px; margin-bottom: 24px;">
+          <li style="margin-bottom: 10px;"><strong>Zero-Connectivity Operation:</strong> In deep tribal villages and flood disaster zones where mobile networks fail, the app allows full offline stock adjustments, voice notes, and SOS alerts.</li>
+          <li style="margin-bottom: 10px;"><strong>Local SQLite Transaction Queue:</strong> Every field action is queued locally with cryptographic timestamps and offline state persistence.</li>
+          <li style="margin-bottom: 10px;"><strong>Automatic Cloud Synchronization:</strong> The instant cellular connectivity (2G/3G/4G/WiFi) is restored, the offline queue syncs seamlessly with cloud servers without data loss.</li>
+          <li style="margin-bottom: 10px;"><strong>Multi-Channel Support (SMS / WhatsApp / Telegram):</strong> Emergency messaging fallback enabling frontline cadres to report stock deficits and receive transfer confirmations via SMS, WhatsApp bots, and Telegram channels even without smartphone data.</li>
           <li><strong>One-Touch Emergency SOS:</strong> Rapid priority trigger for critical shortages of Anti-Snake Venom, blood units, or maternal hemorrhage resuscitation drugs.</li>
         </ul>
       </div>
@@ -581,80 +625,98 @@
     </div>
   </div>
 
-  <!-- SLIDE 11: IMPACT & ROADMAP -->
+  <!-- SLIDE 11: IMPACT & ROADMAP (WITH IMAGES IN 3 BOXES) -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">MEASURABLE OUTCOMES & SCALING ROADMAP</div>
       <div class="slide-title">Transformative Impact Benchmarks & National Deployment</div>
     </div>
 
-    <div class="content-area" style="flex-direction: column; gap: 20px;">
+    <div class="content-area" style="flex-direction: column; gap: 16px;">
       <!-- Benchmarks Row -->
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 12px; font-weight: 700; color: #059669; text-transform: uppercase;">INGESTION LATENCY</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">99.9% FASTER</div>
-          <div style="font-size: 13px; color: #334155;">24h Lag → 2.4s Ingestion</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;">
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 14px 18px;">
+          <div style="font-size: 11px; font-weight: 700; color: #059669; text-transform: uppercase;">INGESTION LATENCY</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #0f172a; margin: 2px 0;">99.9% FASTER</div>
+          <div style="font-size: 12px; color: #334155;">24h Lag → 2.4s Ingestion</div>
         </div>
-        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 12px; font-weight: 700; color: #dc2626; text-transform: uppercase;">STOCKOUT PREVENTION</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">88.4% DROP</div>
-          <div style="font-size: 13px; color: #334155;">7-Day Early Warnings</div>
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 14px 18px;">
+          <div style="font-size: 11px; font-weight: 700; color: #dc2626; text-transform: uppercase;">STOCKOUT PREVENTION</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #0f172a; margin: 2px 0;">88.4% DROP</div>
+          <div style="font-size: 12px; color: #334155;">7-Day Early Warnings</div>
         </div>
-        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 12px; font-weight: 700; color: #1e40af; text-transform: uppercase;">DISPATCH SPEED (TAT)</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">95% SHORTER</div>
-          <div style="font-size: 13px; color: #334155;">5 Days → &lt; 4 Hours</div>
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 14px 18px;">
+          <div style="font-size: 11px; font-weight: 700; color: #1e40af; text-transform: uppercase;">DISPATCH SPEED (TAT)</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #0f172a; margin: 2px 0;">95% SHORTER</div>
+          <div style="font-size: 12px; color: #334155;">5 Days → &lt; 4 Hours</div>
         </div>
-        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px;">
-          <div style="font-size: 12px; font-weight: 700; color: #d97706; text-transform: uppercase;">WORKER TIME SAVED</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">2.5 HRS / DAY</div>
-          <div style="font-size: 13px; color: #334155;">Zero Manual Paperwork</div>
+        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 14px 18px;">
+          <div style="font-size: 11px; font-weight: 700; color: #d97706; text-transform: uppercase;">WORKER TIME SAVED</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #0f172a; margin: 2px 0;">2.5 HRS / DAY</div>
+          <div style="font-size: 12px; color: #334155;">Zero Manual Paperwork</div>
         </div>
       </div>
 
-      <!-- Roadmap Phases -->
-      <div style="display: flex; gap: 20px; flex: 1;">
-        <div class="card" style="flex: 1; padding: 18px 20px;">
-          <div class="card-tag" style="color: #059669;">PHASE 1 (MONTHS 0–3)</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">High-Risk Pilot Deployment</div>
-          <div style="font-size: 14px; line-height: 1.5; color: #475569;">
-            • Deploy across 5 flood & epidemic prone districts (Assam, Bihar, Maharashtra).<br>
-            • Onboard 2,500 frontline ASHA/ANM workers with Indic voice assistant.<br>
-            • Benchmark stockout reductions during active monsoon flood season.
+      <!-- Roadmap Phases with Images -->
+      <div style="display: flex; gap: 18px; flex: 1;">
+        <!-- Phase 1 -->
+        <div class="card" style="flex: 1; padding: 14px 16px; justify-content: space-between;">
+          <div>
+            <div class="card-tag" style="color: #059669;">PHASE 1 (MONTHS 0–3)</div>
+            <div style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">High-Risk Pilot Deployment</div>
+            <div style="font-size: 13px; line-height: 1.45; color: #475569;">
+              • Deploy across 5 flood & epidemic prone districts (Assam, Bihar, Maharashtra).<br>
+              • Onboard 2,500 frontline ASHA/ANM workers with Indic voice assistant.<br>
+              • Benchmark stockout reductions during monsoon.
+            </div>
+          </div>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 8px; max-height: 120px;">
+            <img src="screenshots/p11_phase1.png" alt="Phase 1 Field App" style="width: 100%; display: block;">
           </div>
         </div>
 
-        <div class="card" style="flex: 1; padding: 18px 20px;">
-          <div class="card-tag" style="color: #1e40af;">PHASE 2 (MONTHS 3–9)</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Statewide Cluster Federated Rollout</div>
-          <div style="font-size: 14px; line-height: 1.5; color: #475569;">
-            • Expand to 4 regional state health directorates with active federated nodes.<br>
-            • Connect district cold-chain logistics hubs to redistribution engine.<br>
-            • Integrate Ayushman Bharat Digital Mission (ABDM) registries.
+        <!-- Phase 2 -->
+        <div class="card" style="flex: 1; padding: 14px 16px; justify-content: space-between;">
+          <div>
+            <div class="card-tag" style="color: #1e40af;">PHASE 2 (MONTHS 3–9)</div>
+            <div style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Statewide Cluster Rollout</div>
+            <div style="font-size: 13px; line-height: 1.45; color: #475569;">
+              • Expand to 4 regional state health directorates with active federated nodes.<br>
+              • Connect district cold-chain logistics hubs to redistribution engine.<br>
+              • Integrate Ayushman Bharat (ABDM) registries.
+            </div>
+          </div>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 8px; max-height: 120px;">
+            <img src="screenshots/p11_phase2.png" alt="Phase 2 Logistics Engine" style="width: 100%; display: block;">
           </div>
         </div>
 
-        <div class="card" style="flex: 1; padding: 18px 20px;">
-          <div class="card-tag" style="color: #d97706;">PHASE 3 (MONTHS 9–18)</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Pan-India National Integration</div>
-          <div style="font-size: 14px; line-height: 1.5; color: #475569;">
-            • Full deployment across all 31,000+ PHCs and 150,000+ Sub-Centres.<br>
-            • Universal sovereign federated predictive intelligence.<br>
-            • Real-time national resilience safeguarding all 1.4 billion citizens.
+        <!-- Phase 3 -->
+        <div class="card" style="flex: 1; padding: 14px 16px; justify-content: space-between;">
+          <div>
+            <div class="card-tag" style="color: #d97706;">PHASE 3 (MONTHS 9–18)</div>
+            <div style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Pan-India Integration</div>
+            <div style="font-size: 13px; line-height: 1.45; color: #475569;">
+              • Full deployment across all 31,000+ PHCs and 150,000+ Sub-Centres.<br>
+              • Universal sovereign federated predictive intelligence.<br>
+              • Real-time national resilience for 1.4B citizens.
+            </div>
+          </div>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; margin-top: 8px; max-height: 120px;">
+            <img src="screenshots/p11_phase3.png" alt="Phase 3 National Command" style="width: 100%; display: block;">
           </div>
         </div>
       </div>
 
       <!-- Closing Commitment Banner -->
-      <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 18px 26px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 14px 22px; display: flex; align-items: center; justify-content: space-between;">
         <div>
-          <div style="font-size: 12px; font-weight: 700; color: #059669; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;">THE SANJEEVINI NATIONAL COMMITMENT</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #0f172a;">
+          <div style="font-size: 11px; font-weight: 700; color: #059669; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px;">THE SANJEEVINI NATIONAL COMMITMENT</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; color: #0f172a;">
             “No Indian citizen should ever lose their life due to a preventable shortage of essential life-saving medicine.”
           </div>
         </div>
-        <div style="background: #059669; color: white; padding: 8px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; white-space: nowrap;">
+        <div style="background: #059669; color: white; padding: 7px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; white-space: nowrap;">
           Production Ready
         </div>
       </div>
