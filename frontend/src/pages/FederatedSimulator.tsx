@@ -1,19 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { FederatedStatus } from '../types';
-import { Network, Play, Lock } from 'lucide-react';
+import { Network, Play, Lock, RefreshCw, CheckCircle2 } from 'lucide-react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
+// Ensure Chart.js controllers and scales are registered
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export const FederatedSimulator: React.FC = () => {
   const [status, setStatus] = useState<FederatedStatus | null>(null);
+  const [loading, setLoading] = useState(true);
   const [training, setTraining] = useState(false);
+  const [roundMessage, setRoundMessage] = useState<string | null>(null);
 
   const fetchStatus = async () => {
     try {
       const res = await api.getFederatedStatus();
       setStatus(res.data);
     } catch (e) {
-      console.error(e);
+      console.error('Failed to fetch federated status:', e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -23,22 +50,36 @@ export const FederatedSimulator: React.FC = () => {
 
   const handleTrainRound = async () => {
     setTraining(true);
+    setRoundMessage(null);
     try {
       const res = await api.trainFederatedRound();
       setStatus(res.data);
+      setRoundMessage(`Round #${res.data.current_round} aggregated successfully! Global loss reduced to ${res.data.global_loss}`);
+      setTimeout(() => setRoundMessage(null), 4000);
     } catch (e) {
-      console.error(e);
+      console.error('Failed to trigger federated round:', e);
     } finally {
       setTraining(false);
     }
   };
 
+  if (loading || !status) {
+    return (
+      <main className="app-container" style={{ textAlign: 'center', padding: '60px 0' }}>
+        <RefreshCw size={24} className="animate-spin" style={{ margin: '0 auto 10px', color: 'var(--emerald)' }} />
+        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          Connecting to State Federated Aggregator Nodes...
+        </div>
+      </main>
+    );
+  }
+
   const chartData = {
-    labels: status?.training_history.map((h) => `Round ${h.round}`) || [],
+    labels: (status.training_history || []).map((h) => `Round ${h.round}`),
     datasets: [
       {
         label: 'Global Model Loss (Cross-State Convergence)',
-        data: status?.training_history.map((h) => h.global_loss) || [],
+        data: (status.training_history || []).map((h) => h.global_loss),
         borderColor: '#059669',
         backgroundColor: 'rgba(5, 150, 105, 0.1)',
         fill: true,
@@ -46,7 +87,7 @@ export const FederatedSimulator: React.FC = () => {
       },
       {
         label: 'Stockout Prediction Accuracy',
-        data: status?.training_history.map((h) => h.global_accuracy) || [],
+        data: (status.training_history || []).map((h) => h.global_accuracy),
         borderColor: '#1d4ed8',
         tension: 0.2,
       },
@@ -71,11 +112,18 @@ export const FederatedSimulator: React.FC = () => {
         </button>
       </div>
 
+      {roundMessage && (
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--emerald)', color: 'var(--emerald)', padding: '10px 14px', borderRadius: 6, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem' }}>
+          <CheckCircle2 size={16} />
+          <span>{roundMessage}</span>
+        </div>
+      )}
+
       {/* Compliance Pill */}
       <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)', padding: '10px 14px', borderRadius: 6, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
         <Lock size={16} color="var(--emerald)" />
         <span style={{ fontSize: '0.8rem' }}>
-          <strong>Healthcare Data Sovereignty:</strong> {status?.data_sovereignty_compliance}. Differential Privacy Budget: <strong>ε = {status?.differential_privacy_epsilon}</strong>. No identifiable patient record ever crosses state boundaries.
+          <strong>Healthcare Data Sovereignty:</strong> {status.data_sovereignty_compliance}. Differential Privacy Budget: <strong>ε = {status.differential_privacy_epsilon}</strong>. No identifiable patient record ever crosses state boundaries.
         </span>
       </div>
 
@@ -83,19 +131,19 @@ export const FederatedSimulator: React.FC = () => {
       <div className="grid-stats">
         <div className="glass-panel" style={{ padding: '16px' }}>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Current Federated Round</div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--emerald)' }}>Round #{status?.current_round}</div>
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>Model: {status?.global_model_version}</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--emerald)' }}>Round #{status.current_round}</div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>Model: {status.global_model_version}</div>
         </div>
 
         <div className="glass-panel" style={{ padding: '16px' }}>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Global Cross-Entropy Loss</div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700 }}>{status?.global_loss}</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700 }}>{status.global_loss}</div>
           <div style={{ fontSize: '0.72rem', color: 'var(--emerald)', marginTop: 2 }}>Converging steadily</div>
         </div>
 
         <div className="glass-panel" style={{ padding: '16px' }}>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Stockout Prediction Accuracy</div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#1d4ed8' }}>{((status?.global_accuracy || 0) * 100).toFixed(1)}%</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#1d4ed8' }}>{((status.global_accuracy || 0) * 100).toFixed(1)}%</div>
           <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>Across all 6 state clusters</div>
         </div>
       </div>
@@ -138,7 +186,7 @@ export const FederatedSimulator: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {status?.state_nodes.map((node) => (
+              {(status.state_nodes || []).map((node) => (
                 <tr key={node.state_code}>
                   <td style={{ fontWeight: 600 }}>{node.state_name} ({node.state_code})</td>
                   <td>{node.active_phcs.toLocaleString()} facilities</td>
