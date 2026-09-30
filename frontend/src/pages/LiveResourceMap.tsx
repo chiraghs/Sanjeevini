@@ -37,9 +37,9 @@ export const LiveResourceMap: React.FC = () => {
   const [selectedState, setSelectedState] = useState<string>('ALL');
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
   
-  // Dual Map Engine State: OSM (Default, No Key) or Google Maps
-  const [mapEngine, setMapEngine] = useState<'osm' | 'google_roadmap' | 'google_satellite'>(() => {
-    return (localStorage.getItem('map_engine') as any) || 'osm';
+  // Map Engine State: CARTO Positron (Default Light), Voyager, Dark Matter, OSM, or Google Maps
+  const [mapEngine, setMapEngine] = useState<'carto_positron' | 'carto_voyager' | 'carto_dark' | 'osm' | 'google_roadmap' | 'google_satellite'>(() => {
+    return (localStorage.getItem('map_engine') as any) || 'carto_positron';
   });
   const [googleMapsKey, setGoogleMapsKey] = useState<string>(() => {
     return localStorage.getItem('google_maps_key') || (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY || '';
@@ -65,7 +65,7 @@ export const LiveResourceMap: React.FC = () => {
     setShowKeyModal(false);
   };
 
-  const handleEngineChange = (engine: 'osm' | 'google_roadmap' | 'google_satellite') => {
+  const handleEngineChange = (engine: 'carto_positron' | 'carto_voyager' | 'carto_dark' | 'osm' | 'google_roadmap' | 'google_satellite') => {
     setMapEngine(engine);
     localStorage.setItem('map_engine', engine);
     if ((engine === 'google_roadmap' || engine === 'google_satellite') && !googleMapsKey) {
@@ -75,23 +75,44 @@ export const LiveResourceMap: React.FC = () => {
 
   // Determine Tile Layer URL
   const getTileConfig = () => {
-    if (mapEngine === 'google_roadmap') {
+    if (mapEngine === 'carto_positron') {
+      return {
+        url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd'
+      };
+    } else if (mapEngine === 'carto_voyager') {
+      return {
+        url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd'
+      };
+    } else if (mapEngine === 'carto_dark') {
+      return {
+        url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd'
+      };
+    } else if (mapEngine === 'google_roadmap') {
       const keyParam = googleMapsKey ? `&key=${googleMapsKey}` : '';
       return {
         url: `https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}${keyParam}`,
-        attribution: '&copy; Google Maps Platform'
+        attribution: '&copy; Google Maps Platform',
+        subdomains: 'abc'
       };
     } else if (mapEngine === 'google_satellite') {
       const keyParam = googleMapsKey ? `&key=${googleMapsKey}` : '';
       return {
         url: `https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}${keyParam}`,
-        attribution: '&copy; Google Maps Platform Imagery'
+        attribution: '&copy; Google Maps Platform Imagery',
+        subdomains: 'abc'
       };
     } else {
       // Default: OpenStreetMap (Zero configuration, 100% Free, No API key)
       return {
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abc'
       };
     }
   };
@@ -171,9 +192,18 @@ export const LiveResourceMap: React.FC = () => {
                 fontWeight: 600
               }}
             >
-              <option value="osm">OpenStreetMap (Free, No Key)</option>
-              <option value="google_roadmap">Google Maps (Roadmap)</option>
-              <option value="google_satellite">Google Maps (Satellite / Hybrid)</option>
+              <optgroup label="CARTO Basemaps (Fast &amp; Free)">
+                <option value="carto_positron">CARTO Positron (Clean Light)</option>
+                <option value="carto_voyager">CARTO Voyager (Detailed Clean)</option>
+                <option value="carto_dark">CARTO Dark Matter (Clean Dark)</option>
+              </optgroup>
+              <optgroup label="OpenStreetMap Standard">
+                <option value="osm">OpenStreetMap Standard</option>
+              </optgroup>
+              <optgroup label="Google Maps Platform">
+                <option value="google_roadmap">Google Maps (Roadmap)</option>
+                <option value="google_satellite">Google Maps (Satellite / Hybrid)</option>
+              </optgroup>
             </select>
 
             <button
@@ -231,6 +261,7 @@ export const LiveResourceMap: React.FC = () => {
             key={tileConfig.url}
             attribution={tileConfig.attribution}
             url={tileConfig.url}
+            subdomains={tileConfig.subdomains || 'abc'}
           />
 
           {/* Outbreak Heat Circles */}

@@ -45,7 +45,7 @@ export const AppSimulator: React.FC = () => {
 
   // Voice Tab State
   const [recording, setRecording] = useState(false);
-  const [voiceQuery, setVoiceQuery] = useState('हमारे पास पेरासिटामोल के 10 स्ट्रिप बचे हैं');
+  const [voiceQuery, setVoiceQuery] = useState('We have only 10 strips of Paracetamol remaining');
   const [voiceResult, setVoiceResult] = useState<any>(null);
 
   // Camera Tab State

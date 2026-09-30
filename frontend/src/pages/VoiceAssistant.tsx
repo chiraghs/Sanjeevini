@@ -3,8 +3,8 @@ import { api } from '../services/api';
 import { Mic, Volume2, Globe, Play, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 export const VoiceAssistant: React.FC = () => {
-  const [language, setLanguage] = useState<string>('hi');
-  const [transcript, setTranscript] = useState<string>('हमारे पास पेरासिटामोल के सिर्फ 15 स्ट्रिप बचे हैं और ओआरएस खत्म हो गया है');
+  const [language, setLanguage] = useState<string>('en');
+  const [transcript, setTranscript] = useState<string>('We have only 15 strips of Paracetamol remaining and ORS stock is depleted');
   const [isProcessing, setIsProcessing] = useState(false);
   const [processedResult, setProcessedResult] = useState<any>(null);
 
@@ -127,6 +127,7 @@ export const VoiceAssistant: React.FC = () => {
   };
 
   const languagesList = [
+    { code: 'en', label: 'English (National Coord)', region: 'National' },
     { code: 'hi', label: 'हिन्दी (Hindi)', region: 'North/Central' },
     { code: 'bn', label: 'বাংলা (Bengali)', region: 'West Bengal/Assam' },
     { code: 'te', label: 'తెలుగు (Telugu)', region: 'Andhra Pradesh/Telangana' },
@@ -148,8 +149,7 @@ export const VoiceAssistant: React.FC = () => {
     { code: 'doi', label: 'डोगरी (Dogri)', region: 'Jammu' },
     { code: 'mni', label: 'মণিপুরী / ꯃꯤꯇꯩꯂꯣꯟ (Manipuri)', region: 'Manipur' },
     { code: 'brx', label: "बर' (Bodo)", region: 'Assam' },
-    { code: 'sa', label: 'संस्कृतम् (Sanskrit)', region: 'AYUSH/National' },
-    { code: 'en', label: 'English (National Coord)', region: 'National' }
+    { code: 'sa', label: 'संस्कृतम् (Sanskrit)', region: 'AYUSH/National' }
   ];
 
   const handleProcessVoice = async (textToProcess?: string) => {

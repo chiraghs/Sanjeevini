@@ -2,29 +2,29 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Dignified Indian Healthcare Theme - Dark Mode */
-  --bg-app: #0b1120;
-  --bg-card: #131c31;
-  --bg-card-hover: #1a2642;
-  --border-card: #223150;
-  --border-subtle: #1c2842;
+  /* Dignified Indian Healthcare Theme - Default Light Mode */
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --border-card: #cbd5e1;
+  --border-subtle: #e2e8f0;
 
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
+  --text-main: #0f172a;
+  --text-muted: #475569;
   --text-subtle: #64748b;
   --text-dark: #0f172a;
 
   /* Authoritative Indian Civic & Healthcare Palette */
-  --primary: #1d4ed8;          /* Indian Blue */
-  --primary-hover: #1e40af;
-  --emerald: #059669;          /* Clinical Forest Green */
-  --emerald-hover: #047857;
+  --primary: #1e40af;          /* Indian Blue */
+  --primary-hover: #1d4ed8;
+  --emerald: #047857;          /* Clinical Forest Green */
+  --emerald-hover: #059669;
   --saffron: #d97706;          /* National Alert Amber */
   --danger: #dc2626;           /* Critical Stockout Crimson */
   --warning: #b45309;
 
-  --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25), 0 1px 2px -1px rgba(0, 0, 0, 0.25);
-  color-scheme: dark;
+  --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  color-scheme: light;
 }
 
 [data-theme='light'] {
@@ -43,9 +43,36 @@
   --primary-hover: #1d4ed8;
   --emerald: #047857;
   --emerald-hover: #059669;
+  --saffron: #d97706;
+  --danger: #dc2626;
+  --warning: #b45309;
 
   --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
   color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg-app: #0b1120;
+  --bg-card: #131c31;
+  --bg-card-hover: #1a2642;
+  --border-card: #223150;
+  --border-subtle: #1c2842;
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --text-dark: #0f172a;
+
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --emerald: #059669;
+  --emerald-hover: #047857;
+  --saffron: #d97706;
+  --danger: #dc2626;
+  --warning: #b45309;
+
+  --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25), 0 1px 2px -1px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
 }
 
 * {
@@ -83,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--text-subtle);
 }
 
-/* Standard Badges */
+/* Standard Badges - Default Light Mode */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -97,51 +124,51 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-stable {
-  background: #064e3b;
-  color: #a7f3d0;
-  border: 1px solid #059669;
-}
-
-[data-theme='light'] .badge-stable {
   background: #ecfdf5;
   color: #065f46;
   border: 1px solid #a7f3d0;
 }
 
-.badge-warning {
-  background: #78350f;
-  color: #fde68a;
-  border: 1px solid #d97706;
+[data-theme='dark'] .badge-stable {
+  background: #064e3b;
+  color: #a7f3d0;
+  border: 1px solid #059669;
 }
 
-[data-theme='light'] .badge-warning {
+.badge-warning {
   background: #fffbeb;
   color: #92400e;
   border: 1px solid #fde68a;
 }
 
-.badge-critical {
-  background: #7f1d1d;
-  color: #fecaca;
-  border: 1px solid #dc2626;
+[data-theme='dark'] .badge-warning {
+  background: #78350f;
+  color: #fde68a;
+  border: 1px solid #d97706;
 }
 
-[data-theme='light'] .badge-critical {
+.badge-critical {
   background: #fef2f2;
   color: #991b1b;
   border: 1px solid #fecaca;
 }
 
-.badge-emergency {
-  background: #831843;
-  color: #fbcfe8;
-  border: 1px solid #db2777;
+[data-theme='dark'] .badge-critical {
+  background: #7f1d1d;
+  color: #fecaca;
+  border: 1px solid #dc2626;
 }
 
-[data-theme='light'] .badge-emergency {
+.badge-emergency {
   background: #fff1f2;
   color: #9f1239;
   border: 1px solid #fecdd3;
+}
+
+[data-theme='dark'] .badge-emergency {
+  background: #831843;
+  color: #fbcfe8;
+  border: 1px solid #db2777;
 }
 
 /* Flat Professional Buttons */

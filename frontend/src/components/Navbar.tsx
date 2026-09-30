@@ -25,11 +25,14 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ activeRole, setActiveRole, alertsCount = 4 }) => {
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    return (localStorage.getItem('sanjeevini_theme') as 'dark' | 'light') || 'light';
+  });
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
+    localStorage.setItem('sanjeevini_theme', next);
     document.documentElement.setAttribute('data-theme', next);
   };
 

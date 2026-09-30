@@ -108,7 +108,15 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>(() => {
+    const saved = localStorage.getItem('sanjeevini_language') as Language;
+    return saved || 'en';
+  });
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem('sanjeevini_language', lang);
+  };
 
   const t = (key: string): string => {
     if (translations[key] && translations[key][language]) {
