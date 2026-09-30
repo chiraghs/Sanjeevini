@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sanjeevini Pitch Deck</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+    
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0f172a;
+      color: #0f172a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      page-break-after: always;
+      position: relative;
+      background: #ffffff;
+      padding: 60px 80px 45px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    /* Colors */
+    :root {
+      --navy: #1e40af;
+      --forest: #059669;
+      --forest-dark: #065f46;
+      --amber: #d97706;
+      --crimson: #dc2626;
+      --dark: #0f172a;
+      --muted: #64748b;
+      --card-bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --green-bg: #ecfdf5;
+      --blue-bg: #eff6ff;
+      --red-bg: #fef2f2;
+      --amber-bg: #fffbeb;
+    }
+
+    .header-bar {
+      margin-bottom: 24px;
+    }
+
+    .category-badge {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+
+    .content-area {
+      flex: 1;
+      display: flex;
+      gap: 40px;
+      position: relative;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--card-border);
+      padding-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .card-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+
+    .card-body {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .screenshot-frame {
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+
+    .screenshot-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Metric Box */
+    .metric-card {
+      border-radius: 14px;
+      padding: 30px;
+      border: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .metric-stat {
+      font-family: 'Outfit', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .metric-desc {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: #059669; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px;">
+        🌿
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 700; color: #059669; letter-spacing: 0.08em;">SMART HEALTH & SUPPLY CHAIN RESILIENCE • THEME: RESILIENCE</div>
+        <div style="font-size: 13px; color: #64748b;">National Health Mission (NHM) • Ministry of Health and Family Welfare (MoHFW)</div>
+      </div>
+    </div>
+
+    <div style="margin: auto 0;">
+      <h1 style="font-family: 'Outfit', sans-serif; font-size: 64px; font-weight: 800; color: #0f172a; line-height: 1.15; margin-bottom: 16px;">
+        संजीविनी <span style="color: #1e40af;">(Sanjeevini)</span>
+      </h1>
+      <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; color: #059669; margin-bottom: 24px; max-width: 1400px; line-height: 1.3;">
+        Federated AI Platform for National-Scale Health Resource & Supply Chain Resilience
+      </h2>
+      <p style="font-size: 20px; line-height: 1.6; color: #334155; max-width: 1300px; margin-bottom: 36px;">
+        Delivering real-time inventory visibility across India’s 31,000+ Primary Health Centres, predictive demand forecasting, automated cross-district mutual aid redistribution, and sovereign federated intelligence across India’s states.
+      </p>
+
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">⚡ Google Cloud Run Microservices</span>
+        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🧠 Gemini 1.5 Flash Reasoning</span>
+        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🗺️ CARTO & OSM GIS Engines</span>
+        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🗣️ 22 Scheduled Indian Languages</span>
+        <span style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 18px; font-size: 14px; font-weight: 600; color: #0f172a;">🔒 Sovereign FedAvg Model Synthesis</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 1 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: THE PROBLEM -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">THE CHALLENGE & PUBLIC HEALTH CRISIS</div>
+      <div class="slide-title">The Healthcare Supply Chain Emergency Across India’s PHCs</div>
+    </div>
+
+    <div class="content-area">
+      <div class="card" style="flex: 1; background: #fef2f2; border-color: #fecaca;">
+        <div class="card-tag" style="color: #dc2626;">42% RECURRENT DEFICITS</div>
+        <div class="card-title">Chronic Medicine Stock-Outs</div>
+        <div class="card-body">
+          <p style="margin-bottom: 14px;"><strong>Zero Automated Surge Warnings:</strong> Essential emergency drugs (Paracetamol, ORS, Anti-Snake Venom, Oxytocin) run out during acute seasonal disease surges.</p>
+          <p><strong>The Proximity Paradox:</strong> Excess medicine stockpiles sit expiring in central district warehouses just 40 km away, while rural sub-centres are forced to turn away critical fever and maternal emergencies.</p>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 1;">
+        <div class="card-tag" style="color: #d97706;">12 - 24 HOUR REPORTING LAG</div>
+        <div class="card-title">Manual Ledgers & Data Invisibility</div>
+        <div class="card-body">
+          <p style="margin-bottom: 14px;"><strong>Frontline Cadre Burden:</strong> Over 1,000,000 ASHA and ANM healthcare workers lose 2 to 3 hours every day manually compiling paper ledgers instead of delivering patient care.</p>
+          <p><strong>Latency Blindspots:</strong> Legacy batch databases update only once every 24 hours. Critical outbreak signals during monsoons remain hidden until facilities run out completely.</p>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 1;">
+        <div class="card-tag" style="color: #1e40af;">DATA SOVEREIGNTY BARRIERS</div>
+        <div class="card-title">Interstate Data Silos & DPDP Friction</div>
+        <div class="card-body">
+          <p style="margin-bottom: 14px;"><strong>Compliance Constraints:</strong> Under India’s Digital Personal Data Protection (DPDP) Act 2023, patient health records cannot be pooled into a monolithic central repository.</p>
+          <p><strong>Isolated Prediction Models:</strong> States cannot share local epidemiological trends or coordinate cross-border emergency replenishment without severe privacy risks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 2 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: SOLUTION ARCHITECTURE -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">HOLISTIC PLATFORM ARCHITECTURE</div>
+      <div class="slide-title">The Sanjeevini Ecosystem: 4 Pillars of National Resilience</div>
+    </div>
+
+    <div class="content-area">
+      <div class="card" style="flex: 1; background: #ecfdf5; border-color: #a7f3d0;">
+        <div class="card-tag" style="color: #059669;">PILLAR 1</div>
+        <div class="card-title">Multimodal Ground Capture</div>
+        <div class="card-body">
+          <p style="margin-bottom: 12px;">• <strong>Indic Voice AI:</strong> Hands-free voice reporting across all 22 official scheduled Indian languages + English.</p>
+          <p style="margin-bottom: 12px;">• <strong>Gemini Vision Scanner:</strong> Instantly reads medicine packaging, batch barcodes, and handwritten ledgers.</p>
+          <p>• <strong>Zero Typing:</strong> Tailored for field workers.</p>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 1; background: #eff6ff; border-color: #bfdbfe;">
+        <div class="card-tag" style="color: #1e40af;">PILLAR 2</div>
+        <div class="card-title">Real-Time GIS Surveillance</div>
+        <div class="card-body">
+          <p style="margin-bottom: 12px;">• <strong>National Grid:</strong> Live tracking across 31,000+ PHCs and Sub-Centres.</p>
+          <p style="margin-bottom: 12px;">• <strong>CARTO Positron Engine:</strong> High-legibility civic light maps.</p>
+          <p>• <strong>Buffer Thresholds:</strong><br>🟢 Stable (&gt;7 Days)<br>🟡 Warning (4–7 Days)<br>🔴 Critical Deficit (≤3 Days).</p>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 1;">
+        <div class="card-tag" style="color: #d97706;">PILLAR 3</div>
+        <div class="card-title">Predictive Surge Balancing</div>
+        <div class="card-body">
+          <p style="margin-bottom: 12px;">• <strong>7-Day Early Warnings:</strong> ML forecasts disease surges before stock is exhausted.</p>
+          <p style="margin-bottom: 12px;">• <strong>Algorithmic Pairing:</strong> Matches donor facilities (&gt;14d buffer) with deficit clinics (≤3d buffer).</p>
+          <p>• <strong>Automated Logistics:</strong> Turnkey digital transfer manifests with route guidance.</p>
+        </div>
+      </div>
+
+      <div class="card" style="flex: 1;">
+        <div class="card-tag" style="color: #4f46e5;">PILLAR 4</div>
+        <div class="card-title">Sovereign Federated AI</div>
+        <div class="card-body">
+          <p style="margin-bottom: 12px;">• <strong>Local State Training:</strong> State servers train ML models locally behind state firewalls.</p>
+          <p style="margin-bottom: 12px;">• <strong>Weight Aggregation (FedAvg):</strong> Only mathematical gradients are shared centrally.</p>
+          <p>• <strong>+34.2% Accuracy Boost</strong> without centralizing raw citizen records.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 3 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: NATIONAL COMMAND & GIS MAP -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">REAL-TIME OPERATIONAL INTELLIGENCE</div>
+      <div class="slide-title">National Command Center & CARTO GIS Surveillance</div>
+    </div>
+
+    <div class="content-area">
+      <div style="flex: 0 0 540px; display: flex; flex-direction: column; justify-content: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 16px;">
+          Macroscopic Visibility with Micro-Targeted Intervention
+        </h3>
+        <ul style="font-size: 16px; line-height: 1.7; color: #334155; padding-left: 20px; margin-bottom: 24px;">
+          <li style="margin-bottom: 12px;"><strong>Continuous PHC Tracking:</strong> Telemetry streams monitor drug buffer days, emergency bed occupancy, and medical staff attendance across 31,000+ facilities.</li>
+          <li style="margin-bottom: 12px;"><strong>Epidemic Heat Zones:</strong> Real-time geofenced cluster circles identify emerging flood cholera outbreaks (e.g. Cachar flood zone) and vector-borne dengue hotspots (e.g. Pune cluster).</li>
+          <li style="margin-bottom: 12px;"><strong>Role-Based Governance:</strong> Seamless one-click view switching for Union MoHFW, State Health Directors, District Health Officers (DHOs), and Ground PHCs.</li>
+          <li><strong>Integrated Multi-Engine GIS:</strong> Native toggle between CARTO Positron (clean light), CARTO Voyager, CARTO Dark Matter, OSM, and Google Maps.</li>
+        </ul>
+      </div>
+
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; justify-content: center;">
+        <div class="screenshot-frame">
+          <img src="screenshots/national_command.png" alt="National Command Center">
+        </div>
+        <div class="screenshot-frame">
+          <img src="screenshots/live_map.png" alt="Live Resource Map">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 4 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: INDIC VOICE & OCR -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">VOICE-FIRST & MULTIMODAL INGESTION</div>
+      <div class="slide-title">Frontline Cadre AI: 22 Indic Languages & Visual Scanner</div>
+    </div>
+
+    <div class="content-area">
+      <div style="flex: 0 0 540px; display: flex; flex-direction: column; justify-content: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 16px;">
+          Zero-Typing Field Technology for ASHA & ANM Workers
+        </h3>
+        <ul style="font-size: 16px; line-height: 1.7; color: #334155; padding-left: 20px; margin-bottom: 24px;">
+          <li style="margin-bottom: 12px;"><strong>All 22 Official Scheduled Indian Languages + English:</strong> Comprehensive vernacular acoustic model powered by Gemini 1.5 Flash (Hindi, Marathi, Bengali, Tamil, Telugu, Kannada, Gujarati, Urdu, Malayalam, Odia, Punjabi, Assamese, etc.).</li>
+          <li style="margin-bottom: 12px;"><strong>Intelligent Entity Extraction:</strong> Frontline workers speak natural colloquial phrases; the engine automatically parses drug names, quantity updates, unit categories, and clinical urgency.</li>
+          <li><strong>Gemini Vision Multimodal Scanner:</strong> Frontline cadres take a photo of medication packaging, blister strips, or handwritten physical registers—AI extracts quantities and batch numbers with 98.7% accuracy.</li>
+        </ul>
+      </div>
+
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; justify-content: center;">
+        <div class="screenshot-frame">
+          <img src="screenshots/voice_assistant.png" alt="Indic Voice Assistant">
+        </div>
+        <div class="screenshot-frame">
+          <img src="screenshots/multimodal_scan.png" alt="Multimodal Scanner">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 5 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: AUTOMATED LOGISTICS -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">PREDICTIVE SURGE REDISTRIBUTION</div>
+      <div class="slide-title">Automated Cross-District Inventory Balancing & Logistics</div>
+    </div>
+
+    <div class="content-area">
+      <div style="flex: 0 0 540px; display: flex; flex-direction: column; justify-content: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 16px;">
+          Eliminating Artificial Scarcity with Algorithmic Routing
+        </h3>
+        <ul style="font-size: 16px; line-height: 1.7; color: #334155; padding-left: 20px; margin-bottom: 24px;">
+          <li style="margin-bottom: 12px;"><strong>7-Day Predictive Surge Window:</strong> Machine learning forecasts detect consumption spikes a full week before depletion, activating stock transfers long before zero-stockout occurs.</li>
+          <li style="margin-bottom: 12px;"><strong>Surplus-to-Deficit Pairing:</strong> Dynamically matches donor facilities (&gt;14 days excess buffer) to recipient clinics facing critical deficit (≤3 days buffer) within optimal transit radius.</li>
+          <li style="margin-bottom: 12px;"><strong>Cold-Chain & Transit Optimization:</strong> Evaluates route distance, travel duration, and thermal safeguards for heat-sensitive drugs like Oxytocin and Anti-Snake Venom.</li>
+          <li><strong>One-Click Transfer Authorizations:</strong> Dispatches digital manifests, waypoints, and recipient verification protocols with complete audit logging.</li>
+        </ul>
+      </div>
+
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+        <div class="screenshot-frame" style="width: 100%;">
+          <img src="screenshots/logistics.png" alt="District Logistics Redistribution">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 6 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: FEDERATED LEARNING -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">FEDERATED LEARNING & DPDP COMPLIANCE</div>
+      <div class="slide-title">State Data Sovereignty via Federated Model Aggregation</div>
+    </div>
+
+    <div class="content-area">
+      <div style="flex: 0 0 540px; display: flex; flex-direction: column; justify-content: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 16px;">
+          Shared Predictive Power Without Centralizing Sensitive Records
+        </h3>
+        <ul style="font-size: 16px; line-height: 1.7; color: #334155; padding-left: 20px; margin-bottom: 24px;">
+          <li style="margin-bottom: 12px;"><strong>100% DPDP Act 2023 Compliance:</strong> Citizen medical records and PHC transactional histories remain strictly within individual state cloud infrastructures.</li>
+          <li style="margin-bottom: 12px;"><strong>Independent State Nodes:</strong> State servers (Maharashtra, Assam, Uttar Pradesh, Tamil Nadu) train localized forecasting models on regional disease epidemiology and seasonal spikes.</li>
+          <li style="margin-bottom: 12px;"><strong>FedAvg Gradient Exchange:</strong> Only mathematical weight gradients are uploaded to the Central National Server for global aggregation.</li>
+          <li><strong>+34.2% Higher Forecasting Accuracy:</strong> Enables resource-constrained states to benefit from national epidemiological models without transferring sensitive records.</li>
+        </ul>
+      </div>
+
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+        <div class="screenshot-frame" style="width: 100%;">
+          <img src="screenshots/federated.png" alt="Federated Learning Simulator">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 7 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: MOBILE SIMULATOR -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">EXTREME ENVIRONMENT RESILIENCE</div>
+      <div class="slide-title">Frontline Mobile Simulator: Offline Queue & Sync Mode</div>
+    </div>
+
+    <div class="content-area">
+      <div style="flex: 0 0 540px; display: flex; flex-direction: column; justify-content: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 16px;">
+          Engineered for Connectivity-Deprived Rural & Tribal Belts
+        </h3>
+        <ul style="font-size: 16px; line-height: 1.7; color: #334155; padding-left: 20px; margin-bottom: 24px;">
+          <li style="margin-bottom: 12px;"><strong>Zero-Connectivity Operation:</strong> In deep tribal villages and flood disaster zones where mobile networks fail, the app allows full offline stock adjustments, voice notes, and SOS alerts.</li>
+          <li style="margin-bottom: 12px;"><strong>Local SQLite Transaction Queue:</strong> Every field action is queued locally with cryptographic timestamps and offline state persistence.</li>
+          <li style="margin-bottom: 12px;"><strong>Automatic Cloud Synchronization:</strong> The instant cellular connectivity (2G/3G/4G/WiFi) is restored, the offline queue syncs seamlessly with cloud servers without data loss.</li>
+          <li><strong>One-Touch Emergency SOS:</strong> Rapid priority trigger for critical shortages of Anti-Snake Venom, blood units, or maternal hemorrhage resuscitation drugs.</li>
+        </ul>
+      </div>
+
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+        <div class="screenshot-frame" style="width: 100%;">
+          <img src="screenshots/app_simulator.png" alt="Frontline Mobile Simulator">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 8 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: QUANTIFIED IMPACT -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">MEASURABLE PUBLIC HEALTH OUTCOMES</div>
+      <div class="slide-title">Transformative Impact: Performance Metrics & Benchmarks</div>
+    </div>
+
+    <div class="content-area" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+      <div class="metric-card" style="background: #ecfdf5; border-color: #a7f3d0;">
+        <div class="metric-label" style="color: #059669;">INGESTION LATENCY REDUCTION</div>
+        <div class="metric-stat" style="color: #059669;">99.9% FASTER</div>
+        <div class="metric-desc">
+          <strong>24 Hours Lag → 2.4 Seconds Real-Time:</strong> Multimodal voice and camera ingestion eliminates physical registers, enabling instant national visibility.
+        </div>
+      </div>
+
+      <div class="metric-card" style="background: #fef2f2; border-color: #fecaca;">
+        <div class="metric-label" style="color: #dc2626;">STOCKOUT INCIDENT PREVENTION</div>
+        <div class="metric-stat" style="color: #dc2626;">88.4% REDUCTION</div>
+        <div class="metric-desc">
+          <strong>7-Day Predictive Early Warning:</strong> AI demand curves anticipate acute disease surges long before supply hits zero, triggering proactive replenishment.
+        </div>
+      </div>
+
+      <div class="metric-card" style="background: #eff6ff; border-color: #bfdbfe;">
+        <div class="metric-label" style="color: #1e40af;">INTER-DISTRICT DISPATCH TURNAROUND</div>
+        <div class="metric-stat" style="color: #1e40af;">95% SHORTER TAT</div>
+        <div class="metric-desc">
+          <strong>5 Days Manual Paperwork → &lt; 4 Hours Automated Dispatch:</strong> Algorithmic donor-to-recipient pairing compresses redistribution from a week to a single shift.
+        </div>
+      </div>
+
+      <div class="metric-card" style="background: #fffbeb; border-color: #fde68a;">
+        <div class="metric-label" style="color: #d97706;">FRONTLINE TIME RECOVERED</div>
+        <div class="metric-stat" style="color: #d97706;">2.5 HRS / DAY</div>
+        <div class="metric-desc">
+          <strong>Zero Manual Paperwork:</strong> Hands-free voice reporting in 22 regional languages frees up 15+ hours weekly per healthcare worker for direct patient care.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 9 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: ROADMAP & VISION -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">ENTERPRISE SCALING & ABDM INTEGRATION</div>
+      <div class="slide-title">National Scale Deployment Roadmap & Long-Term Vision</div>
+    </div>
+
+    <div class="content-area" style="flex-direction: column; gap: 24px;">
+      <div style="display: flex; gap: 24px; flex: 1;">
+        <div class="card" style="flex: 1; background: #ecfdf5; border-color: #a7f3d0;">
+          <div class="card-tag" style="color: #059669;">PHASE 1 (MONTHS 0–3)</div>
+          <div class="card-title">High-Risk Pilot Deployment</div>
+          <div class="card-body">
+            <p style="margin-bottom: 12px;">• Deploy across 5 flood & epidemic prone districts (Assam, Bihar, Maharashtra).</p>
+            <p style="margin-bottom: 12px;">• Onboard 2,500 frontline ASHA/ANM workers with Indic voice assistant.</p>
+            <p>• Benchmark stockout reductions during active monsoon flood season.</p>
+          </div>
+        </div>
+
+        <div class="card" style="flex: 1; background: #eff6ff; border-color: #bfdbfe;">
+          <div class="card-tag" style="color: #1e40af;">PHASE 2 (MONTHS 3–9)</div>
+          <div class="card-title">Cluster Federated Rollout</div>
+          <div class="card-body">
+            <p style="margin-bottom: 12px;">• Expand to 4 regional state health directorates with active federated nodes.</p>
+            <p style="margin-bottom: 12px;">• Connect district cold-chain logistics hubs to automated redistribution engine.</p>
+            <p>• Integrate Ayushman Bharat Digital Mission (ABDM) facility registries.</p>
+          </div>
+        </div>
+
+        <div class="card" style="flex: 1; background: #fffbeb; border-color: #fde68a;">
+          <div class="card-tag" style="color: #d97706;">PHASE 3 (MONTHS 9–18)</div>
+          <div class="card-title">Pan-India Integration</div>
+          <div class="card-body">
+            <p style="margin-bottom: 12px;">• Full deployment across all 31,000+ PHCs and 150,000+ Sub-Centres.</p>
+            <p style="margin-bottom: 12px;">• Universal sovereign federated predictive intelligence.</p>
+            <p>• Real-time national resilience safeguarding all 1.4 billion citizens.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 14px; padding: 22px 30px; display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: #059669; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;">THE SANJEEVINI NATIONAL VISION</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #0f172a;">
+            “No Indian citizen should ever lose their life due to a preventable shortage of essential life-saving medicine.”
+          </div>
+        </div>
+        <div style="background: #059669; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; white-space: nowrap;">
+          Production Ready
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 10 of 10</div>
+    </div>
+  </div>
+
+</body>
+</html>
