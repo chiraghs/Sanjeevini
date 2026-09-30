@@ -9,7 +9,16 @@ import {
   FederatedStatus,
 } from '../types';
 
-const API_BASE_URL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+const getBaseUrl = (): string => {
+  let url = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+  url = url.trim().replace(/\/+$/, '');
+  if (!url.endsWith('/api/v1')) {
+    url += '/api/v1';
+  }
+  return url;
+};
+
+const API_BASE_URL = getBaseUrl();
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

@@ -50,7 +50,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount Routers
+# Mount Routers (Primary /api/v1)
 app.include_router(facilities.router, prefix=f"{settings.API_V1_STR}/facilities", tags=["Facilities"])
 app.include_router(inventory.router, prefix=f"{settings.API_V1_STR}/inventory", tags=["Inventory"])
 app.include_router(forecasting.router, prefix=f"{settings.API_V1_STR}/forecasting", tags=["Forecasting"])
@@ -60,6 +60,17 @@ app.include_router(voice.router, prefix=f"{settings.API_V1_STR}/voice", tags=["I
 app.include_router(federated.router, prefix=f"{settings.API_V1_STR}/federated", tags=["Federated Learning"])
 app.include_router(analytics.router, prefix=f"{settings.API_V1_STR}/analytics", tags=["National Analytics"])
 app.include_router(alerts.router, prefix=f"{settings.API_V1_STR}/alerts", tags=["Health Alerts"])
+
+# Dual-mount without /api/v1 for clients configured with root base URL
+app.include_router(facilities.router, prefix="/facilities", include_in_schema=False)
+app.include_router(inventory.router, prefix="/inventory", include_in_schema=False)
+app.include_router(forecasting.router, prefix="/forecasting", include_in_schema=False)
+app.include_router(redistribution.router, prefix="/redistribution", include_in_schema=False)
+app.include_router(multimodal.router, prefix="/multimodal", include_in_schema=False)
+app.include_router(voice.router, prefix="/voice", include_in_schema=False)
+app.include_router(federated.router, prefix="/federated", include_in_schema=False)
+app.include_router(analytics.router, prefix="/analytics", include_in_schema=False)
+app.include_router(alerts.router, prefix="/alerts", include_in_schema=False)
 
 # Prometheus Metrics
 Instrumentator().instrument(app).expose(app)
