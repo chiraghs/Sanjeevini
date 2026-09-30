@@ -134,6 +134,20 @@ export interface FederatedStatus {
     last_gradient_sync: string;
     status: string;
   }>;
+  brics_nodes?: Array<{
+    country_code: string;
+    country_name: string;
+    flag: string;
+    institution: string;
+    active_centers: number;
+    samples_trained: number;
+    focus_area: string;
+    privacy_model: string;
+    local_loss: number;
+    local_accuracy: number;
+    status: string;
+    last_sync: string;
+  }>;
   training_history: Array<{
     round: number;
     global_loss: number;

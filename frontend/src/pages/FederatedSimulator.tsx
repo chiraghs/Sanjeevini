@@ -170,15 +170,23 @@ export const FederatedSimulator: React.FC = () => {
       </div>
 
       {/* Participating State Nodes */}
-      <div className="glass-panel" style={{ padding: '20px' }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 14 }}>Participating State Edge Nodes</h3>
+      <div className="glass-panel" style={{ padding: '20px', marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <div>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 600 }}>National Inter-State Edge Nodes (India)</h3>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+              Schedule 7 on-premise boundary enforcement — models train locally inside state health data centers
+            </p>
+          </div>
+          <span className="badge badge-stable">6 State Clusters Active</span>
+        </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="data-table">
             <thead>
               <tr>
                 <th>State Node</th>
                 <th>Active PHC Network</th>
-                <th>Local Samples Trained</th>
+                <th>Local Records</th>
                 <th>Local Loss</th>
                 <th>Accuracy</th>
                 <th>Privacy Budget (ε)</th>
@@ -196,6 +204,62 @@ export const FederatedSimulator: React.FC = () => {
                   <td>{node.privacy_budget_consumed}</td>
                   <td>
                     <span className="badge badge-stable">{node.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* BRICS International Shared Predictive Modeling */}
+      <div className="glass-panel" style={{ padding: '20px', borderLeft: '4px solid #1e40af' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ fontSize: '1.2rem' }}>🌍</span>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)' }}>
+                BRICS Health Partnership: Shared Predictive Modeling Consortium
+              </h3>
+            </div>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 2 }}>
+              Cross-nation collaborative epidemiological demand modeling across Brazil, Russia, India, China, and South Africa with zero cross-border health data leakage
+            </p>
+          </div>
+          <span className="badge badge-stable" style={{ background: '#eff6ff', color: '#1e40af', border: '1px solid #bfdbfe' }}>
+            5 Sovereign Nations Synced
+          </span>
+        </div>
+
+        <div style={{ overflowX: 'auto' }}>
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Partner Nation</th>
+                <th>Designated Health Grid Institution</th>
+                <th>Active Primary Centers</th>
+                <th>Epidemiological Focus Area</th>
+                <th>Privacy Protocol</th>
+                <th>Local Accuracy</th>
+                <th>Sovereignty Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(status.brics_nodes || []).map((brics) => (
+                <tr key={brics.country_code}>
+                  <td style={{ fontWeight: 700, fontSize: '0.9rem' }}>
+                    <span style={{ marginRight: 6, fontSize: '1.1rem' }}>{brics.flag}</span>
+                    {brics.country_name}
+                  </td>
+                  <td style={{ fontSize: '0.8rem', fontWeight: 500 }}>{brics.institution}</td>
+                  <td style={{ fontWeight: 600 }}>{brics.active_centers.toLocaleString()} centers</td>
+                  <td style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{brics.focus_area}</td>
+                  <td style={{ fontSize: '0.75rem', color: 'var(--emerald)' }}>{brics.privacy_model}</td>
+                  <td style={{ color: '#1d4ed8', fontWeight: 600 }}>{(brics.local_accuracy * 100).toFixed(1)}%</td>
+                  <td>
+                    <span className="badge badge-stable" style={{ fontSize: '0.65rem' }}>
+                      {brics.status}
+                    </span>
                   </td>
                 </tr>
               ))}
