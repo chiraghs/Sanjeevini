@@ -3,27 +3,32 @@ import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import { api } from '../services/api';
 import { MapMarker } from '../types';
-import { Building2, Bed, AlertTriangle, ShieldCheck, Thermometer, Filter } from 'lucide-react';
+import { Building2, Bed, AlertTriangle, Filter, Key, HelpCircle, Layers, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-// Custom SVG Icons for Leaflet markers
-const createCustomIcon = (status: string, count: number) => {
-  let color = '#34d399';
-  if (status === 'CRITICAL') color = '#f87171';
-  else if (status === 'WARNING') color = '#fbbf24';
+// Clean standard SVG icons (no glowing neo-effects)
+const createCleanMarkerIcon = (status: string, count: number) => {
+  let fillColor = '#059669'; // Stable Forest Green
+  let strokeColor = '#064e3b';
+  if (status === 'CRITICAL') {
+    fillColor = '#dc2626'; // Crimson
+    strokeColor = '#7f1d1d';
+  } else if (status === 'WARNING') {
+    fillColor = '#d97706'; // Amber
+    strokeColor = '#78350f';
+  }
 
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
-      <circle cx="18" cy="18" r="14" fill="${color}" fill-opacity="0.3" stroke="${color}" stroke-width="2"/>
-      <circle cx="18" cy="18" r="8" fill="${color}"/>
-      ${count > 0 ? `<text x="18" y="22" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">${count}</text>` : ''}
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+      <circle cx="16" cy="16" r="13" fill="${fillColor}" stroke="${strokeColor}" stroke-width="2"/>
+      ${count > 0 ? `<text x="16" y="20" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">${count}</text>` : ''}
     </svg>
   `;
   return L.divIcon({
     html: svg,
-    className: 'custom-map-marker',
-    iconSize: [36, 36],
-    iconAnchor: [18, 18],
+    className: 'clean-map-marker',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
   });
 };
 
@@ -31,7 +36,16 @@ export const LiveResourceMap: React.FC = () => {
   const [markers, setMarkers] = useState<MapMarker[]>([]);
   const [selectedState, setSelectedState] = useState<string>('ALL');
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
-  const [loading, setLoading] = useState(true);
+  
+  // Dual Map Engine State: OSM (Default, No Key) or Google Maps
+  const [mapEngine, setMapEngine] = useState<'osm' | 'google_roadmap' | 'google_satellite'>(() => {
+    return (localStorage.getItem('map_engine') as any) || 'osm';
+  });
+  const [googleMapsKey, setGoogleMapsKey] = useState<string>(() => {
+    return localStorage.getItem('google_maps_key') || (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY || '';
+  });
+  const [showKeyModal, setShowKeyModal] = useState<boolean>(false);
+  const [tempKeyInput, setTempKeyInput] = useState<string>('');
 
   useEffect(() => {
     const fetchMarkers = async () => {
@@ -40,12 +54,49 @@ export const LiveResourceMap: React.FC = () => {
         setMarkers(res.data.markers);
       } catch (e) {
         console.error(e);
-      } finally {
-        setLoading(false);
       }
     };
     fetchMarkers();
   }, []);
+
+  const handleSaveKey = () => {
+    setGoogleMapsKey(tempKeyInput);
+    localStorage.setItem('google_maps_key', tempKeyInput);
+    setShowKeyModal(false);
+  };
+
+  const handleEngineChange = (engine: 'osm' | 'google_roadmap' | 'google_satellite') => {
+    setMapEngine(engine);
+    localStorage.setItem('map_engine', engine);
+    if ((engine === 'google_roadmap' || engine === 'google_satellite') && !googleMapsKey) {
+      setShowKeyModal(true);
+    }
+  };
+
+  // Determine Tile Layer URL
+  const getTileConfig = () => {
+    if (mapEngine === 'google_roadmap') {
+      const keyParam = googleMapsKey ? `&key=${googleMapsKey}` : '';
+      return {
+        url: `https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}${keyParam}`,
+        attribution: '&copy; Google Maps Platform'
+      };
+    } else if (mapEngine === 'google_satellite') {
+      const keyParam = googleMapsKey ? `&key=${googleMapsKey}` : '';
+      return {
+        url: `https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}${keyParam}`,
+        attribution: '&copy; Google Maps Platform Imagery'
+      };
+    } else {
+      // Default: OpenStreetMap (Zero configuration, 100% Free, No API key)
+      return {
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      };
+    }
+  };
+
+  const tileConfig = getTileConfig();
 
   const filteredMarkers = markers.filter((m) => {
     if (selectedState !== 'ALL' && m.state !== selectedState) return false;
@@ -56,13 +107,13 @@ export const LiveResourceMap: React.FC = () => {
   const states = Array.from(new Set(markers.map((m) => m.state)));
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 65px)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 60px)' }}>
       {/* Map Control Toolbar */}
-      <div className="glass-panel" style={{ borderRadius: 0, padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 500 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Filter size={16} color="#34d399" />
-            <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>Map Filters:</span>
+      <div className="glass-panel" style={{ borderRadius: 0, padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 500 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Filter size={15} color="var(--emerald)" />
+            <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>Filters:</span>
           </div>
 
           {/* State Filter */}
@@ -74,7 +125,7 @@ export const LiveResourceMap: React.FC = () => {
               color: 'var(--text-main)',
               border: '1px solid var(--border-card)',
               borderRadius: 6,
-              padding: '6px 10px',
+              padding: '5px 8px',
               fontSize: '0.8rem',
             }}
           >
@@ -93,29 +144,75 @@ export const LiveResourceMap: React.FC = () => {
               color: 'var(--text-main)',
               border: '1px solid var(--border-card)',
               borderRadius: 6,
-              padding: '6px 10px',
+              padding: '5px 8px',
               fontSize: '0.8rem',
             }}
           >
-            <option value="ALL">All Health Statuses</option>
-            <option value="CRITICAL">🔴 Critical Stockouts</option>
-            <option value="WARNING">🟡 Warning Buffer</option>
-            <option value="STABLE">🟢 Stable Supply</option>
+            <option value="ALL">All Stock Statuses</option>
+            <option value="CRITICAL">🔴 Critical Stockouts (≤3d)</option>
+            <option value="WARNING">🟡 Warning Buffer (4-7d)</option>
+            <option value="STABLE">🟢 Stable Supply (&gt;7d)</option>
           </select>
+
+          {/* Map Engine Switcher */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginLeft: 12, borderLeft: '1px solid var(--border-card)', paddingLeft: 14 }}>
+            <Layers size={14} color="var(--text-muted)" />
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Layer:</span>
+            <select
+              value={mapEngine}
+              onChange={(e) => handleEngineChange(e.target.value as any)}
+              style={{
+                background: 'var(--bg-app)',
+                color: 'var(--text-main)',
+                border: '1px solid var(--border-card)',
+                borderRadius: 6,
+                padding: '5px 8px',
+                fontSize: '0.8rem',
+                fontWeight: 600
+              }}
+            >
+              <option value="osm">OpenStreetMap (Free, No Key)</option>
+              <option value="google_roadmap">Google Maps (Roadmap)</option>
+              <option value="google_satellite">Google Maps (Satellite / Hybrid)</option>
+            </select>
+
+            <button
+              onClick={() => {
+                setTempKeyInput(googleMapsKey);
+                setShowKeyModal(true);
+              }}
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--border-card)',
+                borderRadius: 6,
+                padding: '5px 8px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                fontSize: '0.75rem',
+                color: googleMapsKey ? 'var(--emerald)' : 'var(--text-muted)'
+              }}
+              title="Configure Google Maps API Key"
+            >
+              <Key size={13} />
+              <span>{googleMapsKey ? 'Key Configured' : 'Set Google Key'}</span>
+            </button>
+          </div>
         </div>
 
         {/* Legend */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: '0.78rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: '0.78rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#34d399' }}></span>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#059669' }}></span>
             <span>Stable Supply</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#fbbf24' }}></span>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#d97706' }}></span>
             <span>Warning (4-7 Days)</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#f87171' }}></span>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#dc2626' }}></span>
             <span>Critical Deficit (≤3 Days)</span>
           </div>
         </div>
@@ -124,14 +221,16 @@ export const LiveResourceMap: React.FC = () => {
       {/* Map Container */}
       <div style={{ flex: 1, position: 'relative' }}>
         <MapContainer
-          center={[22.5937, 78.9629]} // Center of India
+          key={mapEngine} // Force re-render on map engine toggle
+          center={[22.5937, 78.9629]} // Geographic center of India
           zoom={5}
           scrollWheelZoom={true}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
-            attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            key={tileConfig.url}
+            attribution={tileConfig.attribution}
+            url={tileConfig.url}
           />
 
           {/* Outbreak Heat Circles */}
@@ -139,13 +238,13 @@ export const LiveResourceMap: React.FC = () => {
           <Circle
             center={[24.8333, 92.7789]}
             radius={45000}
-            pathOptions={{ color: '#f87171', fillColor: '#f87171', fillOpacity: 0.15 }}
+            pathOptions={{ color: '#dc2626', fillColor: '#dc2626', fillOpacity: 0.15 }}
           />
           {/* Pune Vector Outbreak Zone */}
           <Circle
             center={[18.5284, 73.8567]}
             radius={55000}
-            pathOptions={{ color: '#fb923c', fillColor: '#fb923c', fillOpacity: 0.12 }}
+            pathOptions={{ color: '#d97706', fillColor: '#d97706', fillOpacity: 0.12 }}
           />
 
           {/* Facility Markers */}
@@ -153,7 +252,7 @@ export const LiveResourceMap: React.FC = () => {
             <Marker
               key={marker.id}
               position={[marker.lat, marker.lng]}
-              icon={createCustomIcon(marker.status, marker.critical_stockouts_count)}
+              icon={createCleanMarkerIcon(marker.status, marker.critical_stockouts_count)}
             >
               <Popup>
                 <div style={{ padding: 4, minWidth: 220 }}>
@@ -164,7 +263,7 @@ export const LiveResourceMap: React.FC = () => {
                     </span>
                   </div>
 
-                  <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '4px 0' }}>{marker.name}</h4>
+                  <h4 style={{ fontSize: '0.95rem', fontWeight: 600, margin: '4px 0' }}>{marker.name}</h4>
                   <div style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: 8 }}>
                     {marker.district}, {marker.state}
                   </div>
@@ -176,7 +275,7 @@ export const LiveResourceMap: React.FC = () => {
 
                   <div style={{ fontSize: '0.78rem', marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
                     <span>Critical Deficits:</span>
-                    <strong style={{ color: marker.critical_stockouts_count > 0 ? '#f87171' : '#34d399' }}>
+                    <strong style={{ color: marker.critical_stockouts_count > 0 ? '#dc2626' : '#059669' }}>
                       {marker.critical_stockouts_count} items
                     </strong>
                   </div>
@@ -186,17 +285,17 @@ export const LiveResourceMap: React.FC = () => {
                       to="/logistics"
                       style={{
                         flex: 1,
-                        background: '#34d399',
-                        color: '#064e3b',
+                        background: '#059669',
+                        color: '#ffffff',
                         padding: '6px 8px',
-                        borderRadius: 6,
+                        borderRadius: 4,
                         textAlign: 'center',
                         textDecoration: 'none',
                         fontSize: '0.75rem',
-                        fontWeight: 600,
+                        fontWeight: 500,
                       }}
                     >
-                      Redistribute
+                      Redistribute Stock
                     </Link>
                   </div>
                 </div>
@@ -205,6 +304,83 @@ export const LiveResourceMap: React.FC = () => {
           ))}
         </MapContainer>
       </div>
+
+      {/* Google Maps API Key Modal */}
+      {showKeyModal && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0, 0, 0, 0.65)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 2000,
+          }}
+        >
+          <div className="glass-panel" style={{ maxWidth: 540, width: '90%', padding: 24 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+              <Key size={18} color="var(--emerald)" />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 600 }}>Google Maps Platform Configuration</h3>
+            </div>
+
+            <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', marginBottom: 14, lineHeight: 1.5 }}>
+              Sanjeevini supports both <strong>OpenStreetMap (Default, 100% Free, No key needed)</strong> and native <strong>Google Maps (Roadmap & Satellite)</strong>.
+            </p>
+
+            <div style={{ background: 'var(--bg-app)', border: '1px solid var(--border-card)', padding: 12, borderRadius: 6, fontSize: '0.78rem', marginBottom: 16 }}>
+              <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: 4 }}>How to get a Google Maps API Key:</div>
+              <ol style={{ paddingLeft: 18, color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                <li>Visit <a href="https://console.cloud.google.com/" target="_blank" rel="noreferrer" style={{ color: 'var(--emerald)' }}>Google Cloud Console</a>.</li>
+                <li>Create or select your hackathon project.</li>
+                <li>Navigate to <strong>APIs & Services &gt; Library</strong>, search for <strong>Maps JavaScript API</strong> and click <strong>Enable</strong>.</li>
+                <li>Go to <strong>APIs & Services &gt; Credentials</strong>, click <strong>Create Credentials &gt; API Key</strong>.</li>
+                <li>Paste the key below or add <code style={{ color: 'var(--emerald)' }}>VITE_GOOGLE_MAPS_API_KEY</code> to your <code style={{ color: 'var(--emerald)' }}>frontend/.env</code> file.</li>
+              </ol>
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>
+                Enter Google Maps API Key:
+              </label>
+              <input
+                type="text"
+                value={tempKeyInput}
+                onChange={(e) => setTempKeyInput(e.target.value)}
+                placeholder="AIzaSy..."
+                style={{
+                  width: '100%',
+                  background: 'var(--bg-app)',
+                  color: 'var(--text-main)',
+                  border: '1px solid var(--border-card)',
+                  borderRadius: 6,
+                  padding: '8px 12px',
+                  fontSize: '0.85rem',
+                }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+              <button
+                className="btn-outline"
+                onClick={() => {
+                  setMapEngine('osm');
+                  setShowKeyModal(false);
+                }}
+              >
+                Use OpenStreetMap (No Key)
+              </button>
+              <button className="btn-primary" onClick={handleSaveKey}>
+                <Check size={14} />
+                <span>Save Key & Activate Google Maps</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

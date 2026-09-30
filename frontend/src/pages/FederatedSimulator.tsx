@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { FederatedStatus } from '../types';
-import { Network, ShieldCheck, Play, RefreshCw, Lock, Database } from 'lucide-react';
+import { Network, Play, Lock } from 'lucide-react';
 import { Line } from 'react-chartjs-2';
 
 export const FederatedSimulator: React.FC = () => {
@@ -39,74 +39,71 @@ export const FederatedSimulator: React.FC = () => {
       {
         label: 'Global Model Loss (Cross-State Convergence)',
         data: status?.training_history.map((h) => h.global_loss) || [],
-        borderColor: '#34d399',
-        backgroundColor: 'rgba(52, 211, 153, 0.15)',
+        borderColor: '#059669',
+        backgroundColor: 'rgba(5, 150, 105, 0.1)',
         fill: true,
-        tension: 0.3,
+        tension: 0.2,
       },
       {
-        label: 'Predictive Stockout Accuracy',
+        label: 'Stockout Prediction Accuracy',
         data: status?.training_history.map((h) => h.global_accuracy) || [],
-        borderColor: '#60a5fa',
-        tension: 0.3,
+        borderColor: '#1d4ed8',
+        tension: 0.2,
       },
     ],
   };
 
   return (
     <main className="app-container">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-            <Network size={24} color="#34d399" />
-            <h1 style={{ fontSize: '1.8rem', fontWeight: 800 }}>
-              Federated Predictive Modeling & Data Sovereignty
-            </h1>
-          </div>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            Shared epidemiological time-series learning across India's states while respecting Schedule 7 on-premise healthcare data boundaries
+          <h1 style={{ fontSize: '1.6rem', fontWeight: 700, marginBottom: 4 }}>
+            Federated Predictive Modeling & Data Sovereignty
+          </h1>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            Collaborative epidemiological forecasting across India's states while respecting Schedule 7 on-premise healthcare data boundaries
           </p>
         </div>
 
         <button className="btn-primary" onClick={handleTrainRound} disabled={training}>
-          <Play size={16} />
+          <Play size={14} />
           <span>{training ? 'Aggregating Gradients...' : 'Run Federated Aggregation Round (FedAvg)'}</span>
         </button>
       </div>
 
       {/* Compliance Pill */}
-      <div style={{ background: 'hsla(150, 70%, 42%, 0.15)', border: '1px solid hsla(150, 70%, 42%, 0.3)', padding: '12px 18px', borderRadius: 10, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <Lock size={18} color="#34d399" />
-        <span style={{ fontSize: '0.825rem' }}>
-          <strong>Data Sovereignty Guarantee:</strong> {status?.data_sovereignty_compliance}. Differential Privacy Budget: <strong>ε = {status?.differential_privacy_epsilon}</strong>. No identifiable patient record ever crosses state border servers.
+      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)', padding: '10px 14px', borderRadius: 6, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <Lock size={16} color="var(--emerald)" />
+        <span style={{ fontSize: '0.8rem' }}>
+          <strong>Healthcare Data Sovereignty:</strong> {status?.data_sovereignty_compliance}. Differential Privacy Budget: <strong>ε = {status?.differential_privacy_epsilon}</strong>. No identifiable patient record ever crosses state boundaries.
         </span>
       </div>
 
       {/* Top Metrics */}
       <div className="grid-stats">
-        <div className="glass-panel" style={{ padding: '20px' }}>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Current Federated Round</div>
-          <div style={{ fontSize: '1.8rem', fontWeight: 700, color: '#34d399' }}>Round #{status?.current_round}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 4 }}>Model Version: {status?.global_model_version}</div>
+        <div className="glass-panel" style={{ padding: '16px' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Current Federated Round</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--emerald)' }}>Round #{status?.current_round}</div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>Model: {status?.global_model_version}</div>
         </div>
 
-        <div className="glass-panel" style={{ padding: '20px' }}>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Global Cross-Entropy Loss</div>
-          <div style={{ fontSize: '1.8rem', fontWeight: 700 }}>{status?.global_loss}</div>
-          <div style={{ fontSize: '0.75rem', color: '#34d399', marginTop: 4 }}>Converging steadily</div>
+        <div className="glass-panel" style={{ padding: '16px' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Global Cross-Entropy Loss</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700 }}>{status?.global_loss}</div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--emerald)', marginTop: 2 }}>Converging steadily</div>
         </div>
 
-        <div className="glass-panel" style={{ padding: '20px' }}>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Stockout Prediction Accuracy</div>
-          <div style={{ fontSize: '1.8rem', fontWeight: 700, color: '#60a5fa' }}>{((status?.global_accuracy || 0) * 100).toFixed(1)}%</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 4 }}>Across all 6 state clusters</div>
+        <div className="glass-panel" style={{ padding: '16px' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Stockout Prediction Accuracy</div>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#1d4ed8' }}>{((status?.global_accuracy || 0) * 100).toFixed(1)}%</div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 2 }}>Across all 6 state clusters</div>
         </div>
       </div>
 
       {/* Training Chart */}
-      <div className="glass-panel" style={{ padding: '24px', marginBottom: 24 }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 16 }}>Multi-Round Convergence Trajectory</h3>
-        <div style={{ height: 260 }}>
+      <div className="glass-panel" style={{ padding: '20px', marginBottom: 20 }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 14 }}>Multi-Round Convergence Trajectory</h3>
+        <div style={{ height: 240 }}>
           <Line
             data={chartData}
             options={{
@@ -125,8 +122,8 @@ export const FederatedSimulator: React.FC = () => {
       </div>
 
       {/* Participating State Nodes */}
-      <div className="glass-panel" style={{ padding: '24px' }}>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: 16 }}>Participating State Edge Nodes</h3>
+      <div className="glass-panel" style={{ padding: '20px' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: 14 }}>Participating State Edge Nodes</h3>
         <div style={{ overflowX: 'auto' }}>
           <table className="data-table">
             <thead>
@@ -146,8 +143,8 @@ export const FederatedSimulator: React.FC = () => {
                   <td style={{ fontWeight: 600 }}>{node.state_name} ({node.state_code})</td>
                   <td>{node.active_phcs.toLocaleString()} facilities</td>
                   <td>{node.samples_trained.toLocaleString()} records</td>
-                  <td style={{ color: '#34d399', fontWeight: 600 }}>{node.local_loss}</td>
-                  <td style={{ color: '#60a5fa', fontWeight: 600 }}>{(node.local_accuracy * 100).toFixed(1)}%</td>
+                  <td style={{ color: 'var(--emerald)', fontWeight: 600 }}>{node.local_loss}</td>
+                  <td style={{ color: '#1d4ed8', fontWeight: 600 }}>{(node.local_accuracy * 100).toFixed(1)}%</td>
                   <td>{node.privacy_budget_consumed}</td>
                   <td>
                     <span className="badge badge-stable">{node.status}</span>

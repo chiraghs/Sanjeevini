@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import { NationalSummary, HealthAlert, InventoryItem } from '../types';
+import { NationalSummary, HealthAlert } from '../types';
 import { StatCard } from '../components/StatCard';
 import { EmergencyBanner } from '../components/EmergencyBanner';
 import { 
   Building2, 
   Bed, 
-  Activity, 
   AlertTriangle, 
   Truck, 
   ShieldCheck, 
-  ArrowUpRight,
-  TrendingDown
+  ArrowUpRight 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -43,8 +41,8 @@ export const NationalCommand: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="app-container" style={{ textAlign: 'center', padding: '80px 0' }}>
-        <div style={{ fontSize: '1.2rem', color: '#34d399' }}>🌿 Connecting to MoHFW National Health Data Stream...</div>
+      <div className="app-container" style={{ textAlign: 'center', padding: '60px 0' }}>
+        <div style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>Connecting to MoHFW Health Resource Network...</div>
       </div>
     );
   }
@@ -56,24 +54,24 @@ export const NationalCommand: React.FC = () => {
       <main className="app-container">
         
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <div>
-            <h1 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: 4 }}>
+            <h1 style={{ fontSize: '1.6rem', fontWeight: 700, marginBottom: 4 }}>
               National Health Supply Chain & Resource Command
             </h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-              Real-time federated visibility across 30,000+ PHCs, CHCs, and District Hospitals
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+              Real-time monitoring across 30,000+ Primary Health Centres, Community Health Centres, and District Hospitals
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: 10 }}>
+          <div style={{ display: 'flex', gap: 8 }}>
             <Link to="/map" className="btn-outline">
-              <span>View National GIS Map</span>
-              <ArrowUpRight size={15} />
+              <span>National GIS Map</span>
+              <ArrowUpRight size={14} />
             </Link>
             <Link to="/logistics" className="btn-primary">
-              <Truck size={15} />
-              <span>Automated Redistribution</span>
+              <Truck size={14} />
+              <span>Cross-District Redistribution</span>
             </Link>
           </div>
         </div>
@@ -81,20 +79,20 @@ export const NationalCommand: React.FC = () => {
         {/* Top KPI Grid */}
         <div className="grid-stats">
           <StatCard
-            title="National Resilience Score"
+            title="National Buffer Index"
             value={`${summary?.inventory_health.national_resilience_score}%`}
-            subtitle="Based on NLEM drug buffer index"
+            subtitle="Based on NLEM drug safety stock"
             trend="+2.4% vs last week"
             trendType="positive"
-            icon={<ShieldCheck size={22} />}
+            icon={<ShieldCheck size={20} />}
           />
           <StatCard
-            title="Total Registered Facilities"
+            title="Active Facilities Reporting"
             value={summary?.total_facilities.toLocaleString() || '0'}
             subtitle={`${summary?.facility_breakdown.PHC} PHCs | ${summary?.facility_breakdown.CHC} CHCs | ${summary?.facility_breakdown.DH} DHs`}
-            trend="100% reporting"
+            trend="100% connected"
             trendType="positive"
-            icon={<Building2 size={22} />}
+            icon={<Building2 size={20} />}
           />
           <StatCard
             title="Bed Capacity & Utilization"
@@ -102,30 +100,30 @@ export const NationalCommand: React.FC = () => {
             subtitle={`${summary?.beds.occupied} of ${summary?.beds.total} occupied`}
             trend={`${summary?.beds.available} available`}
             trendType="neutral"
-            icon={<Bed size={22} />}
+            icon={<Bed size={20} />}
           />
           <StatCard
-            title="Critical Stockouts (<3 Days)"
+            title="Critical Stockouts (≤3 Days)"
             value={summary?.inventory_health.critical_stockouts || 0}
-            subtitle={`${summary?.inventory_health.warning_stockouts} at warning level (<7d)`}
-            trend="High Priority"
+            subtitle={`${summary?.inventory_health.warning_stockouts} at warning level (4-7d)`}
+            trend="Immediate Attention"
             trendType="negative"
-            icon={<AlertTriangle size={22} />}
+            icon={<AlertTriangle size={20} />}
           />
         </div>
 
-        {/* Dual Column: Watchlist + Active Outbreaks */}
+        {/* Dual Column: Watchlist + Active Alerts */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 20 }}>
           
           {/* Critical Watchlist */}
-          <div className="glass-panel" style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <div className="glass-panel" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Imminent Stockout Watchlist</h3>
-                <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Facilities with life-saving drugs depleting within 7 days</p>
+                <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Imminent Stockout Watchlist</h3>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Primary Health Centres facing depletion within 7 days</p>
               </div>
-              <Link to="/logistics" style={{ color: '#34d399', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600 }}>
-                Resolve All →
+              <Link to="/logistics" style={{ color: 'var(--emerald)', fontSize: '0.8rem', textDecoration: 'none', fontWeight: 600 }}>
+                View Requisitions →
               </Link>
             </div>
 
@@ -136,7 +134,7 @@ export const NationalCommand: React.FC = () => {
                     <th>Facility</th>
                     <th>Medicine</th>
                     <th>Stock</th>
-                    <th>Days Left</th>
+                    <th>Buffer</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -151,7 +149,7 @@ export const NationalCommand: React.FC = () => {
                       </td>
                       <td>
                         <div style={{ fontWeight: 500 }}>{item.medicine_name}</div>
-                        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{item.category}</div>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{item.category}</div>
                       </td>
                       <td style={{ fontWeight: 600 }}>{item.current_stock}</td>
                       <td>
@@ -160,8 +158,8 @@ export const NationalCommand: React.FC = () => {
                         </span>
                       </td>
                       <td>
-                        <Link to="/logistics" className="btn-primary" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>
-                          Transfer
+                        <Link to="/logistics" className="btn-primary" style={{ padding: '3px 8px', fontSize: '0.72rem' }}>
+                          Dispatch
                         </Link>
                       </td>
                     </tr>
@@ -171,38 +169,39 @@ export const NationalCommand: React.FC = () => {
             </div>
           </div>
 
-          {/* Epidemiological Outbreak Alerts */}
-          <div className="glass-panel" style={{ padding: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          {/* Epidemiological Surveillance Alerts */}
+          <div className="glass-panel" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Active Health & Climate Alerts</h3>
-                <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Surveillance triggers driving localized consumption spikes</p>
+                <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Surveillance & Outbreak Triggers</h3>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Early warning signals driving local consumption spikes</p>
               </div>
-              <span className="badge badge-emergency">{alerts.length} Active</span>
+              <span className="badge badge-warning">{alerts.length} Active</span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {alerts.map((alert) => (
                 <div
                   key={alert.id}
                   style={{
-                    background: 'hsla(220, 20%, 30%, 0.15)',
-                    padding: '14px',
-                    borderRadius: 10,
-                    borderLeft: alert.severity === 'CRITICAL' ? '4px solid #f87171' : '4px solid #fb923c'
+                    background: 'var(--bg-app)',
+                    padding: '12px',
+                    borderRadius: 6,
+                    border: '1px solid var(--border-subtle)',
+                    borderLeft: alert.severity === 'CRITICAL' ? '4px solid var(--danger)' : '4px solid var(--warning)'
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                    <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>{alert.title}</span>
-                    <span className="badge badge-warning" style={{ fontSize: '0.65rem' }}>
+                    <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>{alert.title}</span>
+                    <span className="badge badge-warning" style={{ fontSize: '0.62rem' }}>
                       {alert.district}, {alert.state}
                     </span>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 8 }}>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: 6 }}>
                     {alert.description}
                   </p>
-                  <div style={{ fontSize: '0.75rem', color: '#34d399', background: 'hsla(150, 70%, 42%, 0.1)', padding: '6px 10px', borderRadius: 6 }}>
-                    <strong>AI Recommendation:</strong> {alert.ai_mitigation}
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-main)', background: 'var(--border-subtle)', padding: '6px 8px', borderRadius: 4 }}>
+                    <strong>Action Protocol:</strong> {alert.ai_mitigation}
                   </div>
                 </div>
               ))}

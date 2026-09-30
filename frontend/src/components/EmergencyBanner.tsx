@@ -14,20 +14,21 @@ export const EmergencyBanner: React.FC<EmergencyBannerProps> = ({ alerts }) => {
   return (
     <div
       style={{
-        background: 'linear-gradient(90deg, hsla(28, 95%, 45%, 0.25), hsla(4, 78%, 45%, 0.25))',
-        borderBottom: '1px solid hsla(28, 95%, 55%, 0.4)',
-        padding: '8px 24px',
+        background: '#7c2d12',
+        borderBottom: '1px solid #9a3412',
+        color: '#ffedd5',
+        padding: '7px 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        fontSize: '0.825rem',
+        fontSize: '0.8rem',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, maxWidth: '85%' }}>
-        <AlertCircle size={16} color="#fb923c" style={{ flexShrink: 0 }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, maxWidth: '85%' }}>
+        <AlertCircle size={15} color="#fdba74" style={{ flexShrink: 0 }} />
         <span>
-          <strong style={{ color: '#fb923c', marginRight: 6 }}>
-            [EPIDEMIOLOGICAL SURGE ALERT - {topAlert.district?.toUpperCase()}, {topAlert.state?.toUpperCase()}]:
+          <strong style={{ color: '#fed7aa', marginRight: 6 }}>
+            [SURVEILLANCE ALERT - {topAlert.district?.toUpperCase()}, {topAlert.state?.toUpperCase()}]:
           </strong>
           {topAlert.title} — {topAlert.description}
         </span>
@@ -39,14 +40,18 @@ export const EmergencyBanner: React.FC<EmergencyBannerProps> = ({ alerts }) => {
           display: 'flex',
           alignItems: 'center',
           gap: 4,
-          color: '#fb923c',
+          color: '#ffffff',
           textDecoration: 'none',
           fontWeight: 600,
           whiteSpace: 'nowrap',
+          fontSize: '0.75rem',
+          background: 'rgba(255, 255, 255, 0.15)',
+          padding: '3px 8px',
+          borderRadius: 4
         }}
       >
-        <span>Deploy Redistribution</span>
-        <ArrowRight size={14} />
+        <span>Redistribution Protocol</span>
+        <ArrowRight size={13} />
       </Link>
     </div>
   );

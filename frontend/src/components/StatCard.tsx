@@ -18,29 +18,29 @@ export const StatCard: React.FC<StatCardProps> = ({
   icon,
 }) => {
   const getTrendColor = () => {
-    if (trendType === 'positive') return '#34d399';
-    if (trendType === 'negative') return '#f87171';
+    if (trendType === 'positive') return 'var(--emerald)';
+    if (trendType === 'negative') return 'var(--danger)';
     return 'var(--text-muted)';
   };
 
   return (
-    <div className="glass-panel glass-panel-hover" style={{ padding: '20px' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
-        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+    <div className="glass-panel" style={{ padding: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 10 }}>
+        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500 }}>
           {title}
         </span>
         {icon && (
-          <div style={{ color: '#34d399', opacity: 0.9 }}>
+          <div style={{ color: 'var(--text-muted)' }}>
             {icon}
           </div>
         )}
       </div>
 
-      <div style={{ fontSize: '1.9rem', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: 6 }}>
+      <div style={{ fontSize: '1.7rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 4, color: 'var(--text-main)' }}>
         {value}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.78rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.75rem' }}>
         {subtitle && <span style={{ color: 'var(--text-muted)' }}>{subtitle}</span>}
         {trend && (
           <span style={{ color: getTrendColor(), fontWeight: 600 }}>
