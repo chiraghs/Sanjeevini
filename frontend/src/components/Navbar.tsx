@@ -54,22 +54,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeRole, setActiveRole, alert
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: 1440, margin: '0 auto' }}>
         
-        {/* Brand */}
+        {/* Brand matching favicon exactly */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit' }}>
-          <div style={{ 
-            width: 34, 
-            height: 34, 
-            borderRadius: 6, 
-            background: '#059669', 
-            color: '#ffffff',
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            fontSize: '1.2rem',
-            fontWeight: 700 
-          }}>
-            🌿
-          </div>
+          <img 
+            src="/favicon.svg" 
+            alt="Sanjeevini Logo" 
+            style={{ width: 34, height: 34, borderRadius: 8, display: 'block' }} 
+          />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-main)' }}>

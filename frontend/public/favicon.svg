@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="sanjeevini-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded Brand Shield -->
+  <rect width="128" height="128" rx="28" fill="url(#sanjeevini-grad)" />
+  
+  <!-- Subtle inner border -->
+  <rect x="3" y="3" width="122" height="122" rx="25" fill="none" stroke="#34d399" stroke-opacity="0.3" stroke-width="3" />
+  
+  <!-- Medical Cross Accent behind leaf -->
+  <rect x="58" y="32" width="12" height="64" rx="4" fill="#ffffff" fill-opacity="0.25" />
+  <rect x="32" y="58" width="64" height="12" rx="4" fill="#ffffff" fill-opacity="0.25" />
+
+  <!-- Sanjeevini Life-Restoring Herb Leaf Motif -->
+  <path d="M64 26 C82 38, 98 60, 88 84 C80 100, 60 102, 54 88 C48 76, 52 50, 64 26 Z" fill="#ffffff" />
+  <path d="M64 28 C64 54, 58 78, 48 94 C42 80, 44 56, 64 28 Z" fill="#a7f3d0" fill-opacity="0.75" />
+  <path d="M64 36 L64 92" stroke="#047857" stroke-width="3" stroke-linecap="round" />
+  <path d="M64 54 Q74 50, 78 56" stroke="#047857" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M64 68 Q74 64, 76 72" stroke="#047857" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M64 60 Q54 56, 52 64" stroke="#047857" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M64 76 Q56 72, 54 80" stroke="#047857" stroke-width="2.5" stroke-linecap="round" />
+</svg>
