@@ -1,6 +1,10 @@
 # संजीविनी (Sanjeevini)
 ### *Federated AI Platform for National Health Resource & Supply Chain Resilience across India's PHC Network*
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-sanjeevini--ui.onrender.com-success?style=for-the-badge&logo=render&logoColor=white)](https://sanjeevini-ui.onrender.com)
+[![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-blue?style=for-the-badge&logo=fastapi&logoColor=white)](https://sanjeevini-3ztb.onrender.com/docs)
+[![Pitch Deck](https://img.shields.io/badge/Pitch%20Deck-11--Slide%20PDF-crimson?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/chiraghs/Sanjeevini/blob/main/Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)
+
 [![GitHub Repository](https://img.shields.io/badge/GitHub-chiraghs%2FSanjeevini-181717.svg?logo=github)](https://github.com/chiraghs/Sanjeevini)
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111.0-009688.svg)](https://fastapi.tiangolo.com)
@@ -8,6 +12,12 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6.svg)](https://typescriptlang.org)
 [![Google AI](https://img.shields.io/badge/Google%20AI-Gemini%201.5%20Flash-4285F4.svg)](https://ai.google.dev/)
 [![Leaflet](https://img.shields.io/badge/Leaflet-GIS%20Mapping-199900.svg)](https://leafletjs.com)
+
+---
+
+> 🚀 **Live Interactive Web Application:** [**https://sanjeevini-ui.onrender.com**](https://sanjeevini-ui.onrender.com)  
+> 📖 **Live API Swagger Documentation:** [**https://sanjeevini-3ztb.onrender.com/docs**](https://sanjeevini-3ztb.onrender.com/docs)  
+> 📊 **11-Slide Official Pitch Deck:** [**Sanjeevini-Pitch-Deck.pdf**](Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)
 
 ---
 
@@ -154,10 +164,12 @@ npm run dev
 ```
 
 Visit:
-- **Frontend Dashboard**: `http://localhost:5173`
-- **Swagger API Docs**: `http://localhost:8000/docs`
-- **Prometheus Metrics**: `http://localhost:8000/metrics`
-- **Health Check**: `http://localhost:8000/health`
+- **Live Deployed Web Application**: [https://sanjeevini-ui.onrender.com](https://sanjeevini-ui.onrender.com)
+- **Live Production API Docs**: [https://sanjeevini-3ztb.onrender.com/docs](https://sanjeevini-3ztb.onrender.com/docs)
+- **Local Frontend Dashboard**: `http://localhost:5173`
+- **Local Swagger API Docs**: `http://localhost:8000/docs`
+- **Local Prometheus Metrics**: `http://localhost:8000/metrics`
+- **Local Health Check**: `http://localhost:8000/health`
 
 ---
 
