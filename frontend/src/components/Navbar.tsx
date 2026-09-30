@@ -14,6 +14,7 @@ import {
   AlertTriangle,
   Smartphone
 } from 'lucide-react';
+import { SanjeeviniLogo } from './SanjeeviniLogo';
 
 interface NavbarProps {
   activeRole: string;
@@ -56,20 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeRole, setActiveRole, alert
         
         {/* Brand matching favicon exactly */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit' }}>
-          <div style={{ 
-            width: 34, 
-            height: 34, 
-            borderRadius: 8, 
-            background: '#059669', 
-            color: '#ffffff',
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            fontSize: '1.25rem',
-            flexShrink: 0
-          }}>
-            🌿
-          </div>
+          <SanjeeviniLogo size={34} />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-main)' }}>
