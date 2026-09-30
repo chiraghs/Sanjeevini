@@ -100,7 +100,7 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 28px 24px;
+      padding: 26px 22px;
       display: flex;
       flex-direction: column;
       box-shadow: 0 2px 4px rgba(0,0,0,0.02);
@@ -116,14 +116,14 @@
 
     .card-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 700;
       color: var(--dark);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .card-body {
-      font-size: 16px;
+      font-size: 15.5px;
       line-height: 1.6;
       color: #334155;
     }
@@ -142,36 +142,32 @@
       display: block;
     }
 
-    /* Metric Box */
-    .metric-card {
-      border-radius: 14px;
-      padding: 30px;
+    /* Architecture Layer Card */
+    .arch-layer-card {
       border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 24px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
-    .metric-stat {
-      font-family: 'Outfit', sans-serif;
-      font-size: 42px;
-      font-weight: 800;
-      color: var(--dark);
-      margin-bottom: 6px;
-    }
-
-    .metric-label {
+    .arch-layer-badge {
       font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
+      font-weight: 800;
       letter-spacing: 0.06em;
-      margin-bottom: 8px;
+      text-transform: uppercase;
+      width: 260px;
+      flex-shrink: 0;
     }
 
-    .metric-desc {
+    .arch-layer-items {
+      flex: 1;
       font-size: 15px;
       line-height: 1.5;
-      color: #475569;
+      color: #1e293b;
+      font-weight: 500;
     }
   </style>
 </head>
@@ -190,8 +186,8 @@
     </div>
 
     <div style="margin: auto 0;">
-      <h1 style="font-family: 'Outfit', sans-serif; font-size: 64px; font-weight: 800; color: #0f172a; line-height: 1.15; margin-bottom: 16px;">
-        संजीविनी <span style="color: #1e40af;">(Sanjeevini)</span>
+      <h1 style="font-family: 'Outfit', sans-serif; font-size: 72px; font-weight: 800; color: #0f172a; line-height: 1.1; margin-bottom: 16px;">
+        Sanjeevini
       </h1>
       <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; color: #059669; margin-bottom: 24px; max-width: 1400px; line-height: 1.3;">
         Federated AI Platform for National-Scale Health Resource & Supply Chain Resilience
@@ -210,7 +206,7 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
       <div>Slide 1 of 10</div>
     </div>
   </div>
@@ -252,15 +248,15 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
       <div>Slide 2 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 3: SOLUTION ARCHITECTURE -->
+  <!-- SLIDE 3: SOLUTION ARCHITECTURE (4 PILLARS) -->
   <div class="slide">
     <div class="header-bar">
-      <div class="category-badge">HOLISTIC PLATFORM ARCHITECTURE</div>
+      <div class="category-badge">HOLISTIC PLATFORM STRATEGY</div>
       <div class="slide-title">The Sanjeevini Ecosystem: 4 Pillars of National Resilience</div>
     </div>
 
@@ -307,12 +303,86 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
       <div>Slide 3 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 4: NATIONAL COMMAND & GIS MAP -->
+  <!-- SLIDE 4: SYSTEM ARCHITECTURE (FROM README.MD) -->
+  <div class="slide">
+    <div class="header-bar">
+      <div class="category-badge">5-TIER CLOUD & EDGE INFRASTRUCTURE (FROM README)</div>
+      <div class="slide-title">System Architecture: End-to-End Enterprise Design</div>
+    </div>
+
+    <div class="content-area" style="flex-direction: column; gap: 16px; justify-content: center;">
+      <!-- Tier 1 -->
+      <div class="arch-layer-card" style="background: #ecfdf5; border-color: #a7f3d0;">
+        <div class="arch-layer-badge" style="color: #059669;">
+          1. Clients & Frontline Field Workers
+        </div>
+        <div class="arch-layer-items">
+          • ASHA / ANM Frontline Cadre (Voice / Mobile Simulator PWA)<br>
+          • PHC Pharmacist / Medical Officer (Ground Console)<br>
+          • District Health Officer (Redistribution Hub)  •  National MoHFW Command Deck
+        </div>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="arch-layer-card" style="background: #eff6ff; border-color: #bfdbfe;">
+        <div class="arch-layer-badge" style="color: #1e40af;">
+          2. Presentation Layer
+        </div>
+        <div class="arch-layer-items">
+          • Vite Single Page Application (React 18 + TypeScript + Responsive Mobile Shell)<br>
+          • CARTO Positron & Leaflet GIS Heatmap & Outbreak Cluster Engine<br>
+          • Web Speech & 22 Indic Audio Processors  •  Camera / Ledger OCR Canvas Component
+        </div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="arch-layer-card" style="background: #f8fafc; border-color: #cbd5e1;">
+        <div class="arch-layer-badge" style="color: #0f172a;">
+          3. Core API & Business Logic
+        </div>
+        <div class="arch-layer-items">
+          • FastAPI Core Asynchronous Services  •  Vertex AI & Epidemiological Demand Forecasting Engine<br>
+          • Cost-Distance-Expiry Matching Algorithm (Cross-District Redistribution)<br>
+          • FedAvg Multi-State Aggregator & Coordinator  •  Gemini 1.5 Flash Vision Multimodal Extractor
+        </div>
+      </div>
+
+      <!-- Tier 4 -->
+      <div class="arch-layer-card" style="background: #ecfdf5; border-color: #a7f3d0;">
+        <div class="arch-layer-badge" style="color: #059669;">
+          4. AI & Cloud Integrations
+        </div>
+        <div class="arch-layer-items">
+          • Google Gemini 1.5 Flash / Pro Multimodal Engine (Prescription & Ledger Extraction)<br>
+          • Vertex AI Time-Series Forecaster  •  Google Cloud Speech-to-Text & Indic Translation<br>
+          • Google BigQuery (HMIS & IDSP National Epidemiological Data Bridge)
+        </div>
+      </div>
+
+      <!-- Tier 5 -->
+      <div class="arch-layer-card" style="background: #fffbeb; border-color: #fde68a;">
+        <div class="arch-layer-badge" style="color: #d97706;">
+          5. Storage, Queue & Sovereignty
+        </div>
+        <div class="arch-layer-items">
+          • SQLite (Zero-Config Edge Dev)  •  Google Cloud SQL PostgreSQL (Enterprise Production)<br>
+          • Offline SQLite Client Queue (Network Outage Resilience)  •  Redis Queue & Rate Limiter
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 4 of 10</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: NATIONAL COMMAND & GIS MAP -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">REAL-TIME OPERATIONAL INTELLIGENCE</div>
@@ -343,12 +413,12 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
-      <div>Slide 4 of 10</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 5 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 5: INDIC VOICE & OCR -->
+  <!-- SLIDE 6: INDIC VOICE & OCR -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">VOICE-FIRST & MULTIMODAL INGESTION</div>
@@ -378,12 +448,12 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
-      <div>Slide 5 of 10</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 6 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 6: AUTOMATED LOGISTICS -->
+  <!-- SLIDE 7: AUTOMATED LOGISTICS -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">PREDICTIVE SURGE REDISTRIBUTION</div>
@@ -411,12 +481,12 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
-      <div>Slide 6 of 10</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 7 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 7: FEDERATED LEARNING -->
+  <!-- SLIDE 8: FEDERATED LEARNING -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">FEDERATED LEARNING & DPDP COMPLIANCE</div>
@@ -444,12 +514,12 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
-      <div>Slide 7 of 10</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Slide 8 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 8: MOBILE SIMULATOR -->
+  <!-- SLIDE 9: MOBILE SIMULATOR -->
   <div class="slide">
     <div class="header-bar">
       <div class="category-badge">EXTREME ENVIRONMENT RESILIENCE</div>
@@ -477,113 +547,92 @@
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
-      <div>Slide 8 of 10</div>
-    </div>
-  </div>
-
-  <!-- SLIDE 9: QUANTIFIED IMPACT -->
-  <div class="slide">
-    <div class="header-bar">
-      <div class="category-badge">MEASURABLE PUBLIC HEALTH OUTCOMES</div>
-      <div class="slide-title">Transformative Impact: Performance Metrics & Benchmarks</div>
-    </div>
-
-    <div class="content-area" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-      <div class="metric-card" style="background: #ecfdf5; border-color: #a7f3d0;">
-        <div class="metric-label" style="color: #059669;">INGESTION LATENCY REDUCTION</div>
-        <div class="metric-stat" style="color: #059669;">99.9% FASTER</div>
-        <div class="metric-desc">
-          <strong>24 Hours Lag → 2.4 Seconds Real-Time:</strong> Multimodal voice and camera ingestion eliminates physical registers, enabling instant national visibility.
-        </div>
-      </div>
-
-      <div class="metric-card" style="background: #fef2f2; border-color: #fecaca;">
-        <div class="metric-label" style="color: #dc2626;">STOCKOUT INCIDENT PREVENTION</div>
-        <div class="metric-stat" style="color: #dc2626;">88.4% REDUCTION</div>
-        <div class="metric-desc">
-          <strong>7-Day Predictive Early Warning:</strong> AI demand curves anticipate acute disease surges long before supply hits zero, triggering proactive replenishment.
-        </div>
-      </div>
-
-      <div class="metric-card" style="background: #eff6ff; border-color: #bfdbfe;">
-        <div class="metric-label" style="color: #1e40af;">INTER-DISTRICT DISPATCH TURNAROUND</div>
-        <div class="metric-stat" style="color: #1e40af;">95% SHORTER TAT</div>
-        <div class="metric-desc">
-          <strong>5 Days Manual Paperwork → &lt; 4 Hours Automated Dispatch:</strong> Algorithmic donor-to-recipient pairing compresses redistribution from a week to a single shift.
-        </div>
-      </div>
-
-      <div class="metric-card" style="background: #fffbeb; border-color: #fde68a;">
-        <div class="metric-label" style="color: #d97706;">FRONTLINE TIME RECOVERED</div>
-        <div class="metric-stat" style="color: #d97706;">2.5 HRS / DAY</div>
-        <div class="metric-desc">
-          <strong>Zero Manual Paperwork:</strong> Hands-free voice reporting in 22 regional languages frees up 15+ hours weekly per healthcare worker for direct patient care.
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
       <div>Slide 9 of 10</div>
     </div>
   </div>
 
-  <!-- SLIDE 10: ROADMAP & VISION -->
+  <!-- SLIDE 10: IMPACT & ROADMAP -->
   <div class="slide">
     <div class="header-bar">
-      <div class="category-badge">ENTERPRISE SCALING & ABDM INTEGRATION</div>
-      <div class="slide-title">National Scale Deployment Roadmap & Long-Term Vision</div>
+      <div class="category-badge">MEASURABLE OUTCOMES & SCALING ROADMAP</div>
+      <div class="slide-title">Transformative Impact Benchmarks & National Deployment</div>
     </div>
 
-    <div class="content-area" style="flex-direction: column; gap: 24px;">
-      <div style="display: flex; gap: 24px; flex: 1;">
-        <div class="card" style="flex: 1; background: #ecfdf5; border-color: #a7f3d0;">
+    <div class="content-area" style="flex-direction: column; gap: 20px;">
+      <!-- Benchmarks Row -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 12px; font-weight: 700; color: #059669; text-transform: uppercase;">INGESTION LATENCY</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">99.9% FASTER</div>
+          <div style="font-size: 13px; color: #334155;">24h Lag → 2.4s Ingestion</div>
+        </div>
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 12px; font-weight: 700; color: #dc2626; text-transform: uppercase;">STOCKOUT PREVENTION</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">88.4% DROP</div>
+          <div style="font-size: 13px; color: #334155;">7-Day Early Warnings</div>
+        </div>
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 12px; font-weight: 700; color: #1e40af; text-transform: uppercase;">DISPATCH SPEED (TAT)</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">95% SHORTER</div>
+          <div style="font-size: 13px; color: #334155;">5 Days → &lt; 4 Hours</div>
+        </div>
+        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px;">
+          <div style="font-size: 12px; font-weight: 700; color: #d97706; text-transform: uppercase;">WORKER TIME SAVED</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #0f172a; margin: 4px 0;">2.5 HRS / DAY</div>
+          <div style="font-size: 13px; color: #334155;">Zero Manual Paperwork</div>
+        </div>
+      </div>
+
+      <!-- Roadmap Phases -->
+      <div style="display: flex; gap: 20px; flex: 1;">
+        <div class="card" style="flex: 1; padding: 18px 20px;">
           <div class="card-tag" style="color: #059669;">PHASE 1 (MONTHS 0–3)</div>
-          <div class="card-title">High-Risk Pilot Deployment</div>
-          <div class="card-body">
-            <p style="margin-bottom: 12px;">• Deploy across 5 flood & epidemic prone districts (Assam, Bihar, Maharashtra).</p>
-            <p style="margin-bottom: 12px;">• Onboard 2,500 frontline ASHA/ANM workers with Indic voice assistant.</p>
-            <p>• Benchmark stockout reductions during active monsoon flood season.</p>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">High-Risk Pilot Deployment</div>
+          <div style="font-size: 14px; line-height: 1.5; color: #475569;">
+            • Deploy across 5 flood & epidemic prone districts (Assam, Bihar, Maharashtra).<br>
+            • Onboard 2,500 frontline ASHA/ANM workers with Indic voice assistant.<br>
+            • Benchmark stockout reductions during active monsoon flood season.
           </div>
         </div>
 
-        <div class="card" style="flex: 1; background: #eff6ff; border-color: #bfdbfe;">
+        <div class="card" style="flex: 1; padding: 18px 20px;">
           <div class="card-tag" style="color: #1e40af;">PHASE 2 (MONTHS 3–9)</div>
-          <div class="card-title">Cluster Federated Rollout</div>
-          <div class="card-body">
-            <p style="margin-bottom: 12px;">• Expand to 4 regional state health directorates with active federated nodes.</p>
-            <p style="margin-bottom: 12px;">• Connect district cold-chain logistics hubs to automated redistribution engine.</p>
-            <p>• Integrate Ayushman Bharat Digital Mission (ABDM) facility registries.</p>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Statewide Cluster Federated Rollout</div>
+          <div style="font-size: 14px; line-height: 1.5; color: #475569;">
+            • Expand to 4 regional state health directorates with active federated nodes.<br>
+            • Connect district cold-chain logistics hubs to redistribution engine.<br>
+            • Integrate Ayushman Bharat Digital Mission (ABDM) registries.
           </div>
         </div>
 
-        <div class="card" style="flex: 1; background: #fffbeb; border-color: #fde68a;">
+        <div class="card" style="flex: 1; padding: 18px 20px;">
           <div class="card-tag" style="color: #d97706;">PHASE 3 (MONTHS 9–18)</div>
-          <div class="card-title">Pan-India Integration</div>
-          <div class="card-body">
-            <p style="margin-bottom: 12px;">• Full deployment across all 31,000+ PHCs and 150,000+ Sub-Centres.</p>
-            <p style="margin-bottom: 12px;">• Universal sovereign federated predictive intelligence.</p>
-            <p>• Real-time national resilience safeguarding all 1.4 billion citizens.</p>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Pan-India National Integration</div>
+          <div style="font-size: 14px; line-height: 1.5; color: #475569;">
+            • Full deployment across all 31,000+ PHCs and 150,000+ Sub-Centres.<br>
+            • Universal sovereign federated predictive intelligence.<br>
+            • Real-time national resilience safeguarding all 1.4 billion citizens.
           </div>
         </div>
       </div>
 
-      <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 14px; padding: 22px 30px; display: flex; align-items: center; justify-content: space-between;">
+      <!-- Closing Commitment Banner -->
+      <div style="background: #f0fdf4; border: 2px solid #a7f3d0; border-radius: 12px; padding: 18px 26px; display: flex; align-items: center; justify-content: space-between;">
         <div>
-          <div style="font-size: 13px; font-weight: 700; color: #059669; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;">THE SANJEEVINI NATIONAL VISION</div>
-          <div style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #0f172a;">
+          <div style="font-size: 12px; font-weight: 700; color: #059669; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px;">THE SANJEEVINI NATIONAL COMMITMENT</div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #0f172a;">
             “No Indian citizen should ever lose their life due to a preventable shortage of essential life-saving medicine.”
           </div>
         </div>
-        <div style="background: #059669; color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; white-space: nowrap;">
+        <div style="background: #059669; color: white; padding: 8px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; white-space: nowrap;">
           Production Ready
         </div>
       </div>
     </div>
 
     <div class="footer-bar">
-      <div>संजीविनी (Sanjeevini) • National Health Resource & Supply Chain Resilience Platform</div>
+      <div>Sanjeevini • National Health Resource & Supply Chain Resilience Platform</div>
       <div>Slide 10 of 10</div>
     </div>
   </div>
