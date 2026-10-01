@@ -12,6 +12,7 @@ import {
   ArrowUpRight 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { NetworkLoader } from '../components/NetworkLoader';
 
 export const NationalCommand: React.FC = () => {
   const [summary, setSummary] = useState<NationalSummary | null>(null);
@@ -19,31 +20,33 @@ export const NationalCommand: React.FC = () => {
   const [watchlist, setWatchlist] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const [sumRes, alertRes, watchRes] = await Promise.all([
+        api.getNationalSummary(),
+        api.getAlerts(),
+        api.getCriticalWatchlist({ limit: 6 })
+      ]);
+      setSummary(sumRes.data);
+      setAlerts(alertRes.data.alerts);
+      setWatchlist(watchRes.data.watchlist);
+    } catch (e) {
+      console.error('Failed to fetch national data:', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [sumRes, alertRes, watchRes] = await Promise.all([
-          api.getNationalSummary(),
-          api.getAlerts(),
-          api.getCriticalWatchlist({ limit: 6 })
-        ]);
-        setSummary(sumRes.data);
-        setAlerts(alertRes.data.alerts);
-        setWatchlist(watchRes.data.watchlist);
-      } catch (e) {
-        console.error('Failed to fetch national data:', e);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchData();
   }, []);
 
   if (loading) {
     return (
-      <div className="app-container" style={{ textAlign: 'center', padding: '60px 0' }}>
-        <div style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>Connecting to MoHFW Health Resource Network...</div>
-      </div>
+      <main className="app-container">
+        <NetworkLoader onRetry={fetchData} />
+      </main>
     );
   }
 

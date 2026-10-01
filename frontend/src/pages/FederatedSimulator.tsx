@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { FederatedStatus } from '../types';
+import { NetworkLoader } from '../components/NetworkLoader';
 import { Network, Play, Lock, RefreshCw, CheckCircle2 } from 'lucide-react';
 import {
   Chart as ChartJS,
@@ -65,11 +66,11 @@ export const FederatedSimulator: React.FC = () => {
 
   if (loading || !status) {
     return (
-      <main className="app-container" style={{ textAlign: 'center', padding: '60px 0' }}>
-        <RefreshCw size={24} className="animate-spin" style={{ margin: '0 auto 10px', color: 'var(--emerald)' }} />
-        <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Connecting to State Federated Aggregator Nodes...
-        </div>
+      <main className="app-container">
+        <NetworkLoader
+          message="Connecting to State & Sovereign Federated Aggregator Nodes..."
+          onRetry={fetchStatus}
+        />
       </main>
     );
   }
