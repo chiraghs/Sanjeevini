@@ -38,3 +38,7 @@ htmlcov/
 # Local uploads and data
 uploads/
 backend/uploads/
+demo-recording/
+*.mp4
+*.webm
+*.aiff
