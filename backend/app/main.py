@@ -18,6 +18,8 @@ from app.api.v1 import (
     federated,
     analytics,
     alerts,
+    dialogflow,
+    sms,
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -60,6 +62,8 @@ app.include_router(voice.router, prefix=f"{settings.API_V1_STR}/voice", tags=["I
 app.include_router(federated.router, prefix=f"{settings.API_V1_STR}/federated", tags=["Federated Learning"])
 app.include_router(analytics.router, prefix=f"{settings.API_V1_STR}/analytics", tags=["National Analytics"])
 app.include_router(alerts.router, prefix=f"{settings.API_V1_STR}/alerts", tags=["Health Alerts"])
+app.include_router(dialogflow.router, prefix=f"{settings.API_V1_STR}/dialogflow", tags=["Dialogflow / WhatsApp"])
+app.include_router(sms.router, prefix=f"{settings.API_V1_STR}/sms", tags=["SMS Gateway"])
 
 # Dual-mount without /api/v1 for clients configured with root base URL
 app.include_router(facilities.router, prefix="/facilities", include_in_schema=False)
@@ -71,6 +75,8 @@ app.include_router(voice.router, prefix="/voice", include_in_schema=False)
 app.include_router(federated.router, prefix="/federated", include_in_schema=False)
 app.include_router(analytics.router, prefix="/analytics", include_in_schema=False)
 app.include_router(alerts.router, prefix="/alerts", include_in_schema=False)
+app.include_router(dialogflow.router, prefix="/dialogflow", include_in_schema=False)
+app.include_router(sms.router, prefix="/sms", include_in_schema=False)
 
 # Prometheus Metrics
 Instrumentator().instrument(app).expose(app)

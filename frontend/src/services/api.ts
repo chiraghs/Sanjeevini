@@ -41,6 +41,22 @@ export const api = {
     apiClient.get<{ total: number; items: InventoryItem[] }>('/inventory/', { params }),
   updateStock: (data: { facility_id: number; medicine_id: number; quantity_delta: number; reason?: string }) =>
     apiClient.post('/inventory/update', data),
+  syncOfflineQueue: (data: {
+    facility_id: number;
+    device_id?: string;
+    items: Array<{
+      client_uuid: string;
+      action_type: string;
+      medicine_id?: number;
+      quantity_delta?: number;
+      details?: string;
+      recorded_at?: string;
+    }>;
+  }) => apiClient.post('/inventory/sync-queue', data),
+  sendSmsIntake: (data: { From?: string; Body: string }) =>
+    apiClient.post('/sms/intake', data),
+  sendDialogflowWebhook: (data: any) =>
+    apiClient.post('/dialogflow/webhook', data),
 
   // Forecasting
   getSingleForecast: (facilityId: number, medicineId: number) =>

@@ -72,3 +72,47 @@ def test_voice_indic():
     data = res.json()
     assert data["success"] is True
     assert "intent" in data["processed"]
+
+def test_offline_sync_queue():
+    res = client.post("/api/v1/inventory/sync-queue", json={
+        "facility_id": 1,
+        "device_id": "MOBI-TEST-01",
+        "items": [
+            {
+                "client_uuid": "test-uuid-001",
+                "action_type": "STOCK_ADJUST",
+                "medicine_id": 1,
+                "quantity_delta": -2,
+                "details": "Paracetamol dispensation"
+            },
+            {
+                "client_uuid": "test-uuid-002",
+                "action_type": "EMERGENCY_SOS",
+                "details": "Urgent ASV required"
+            }
+        ]
+    })
+    assert res.status_code == 200
+    data = res.json()
+    assert data["success"] is True
+    assert data["processed_count"] == 2
+
+def test_dialogflow_webhook():
+    res = client.post("/api/v1/dialogflow/webhook", json={
+        "text": "Check stock of Paracetamol at PHC Sonai",
+        "intentInfo": {"displayName": "health.stock.check"},
+        "sessionInfo": {"parameters": {}}
+    })
+    assert res.status_code == 200
+    data = res.json()
+    assert "fulfillmentResponse" in data
+    assert len(data["fulfillmentResponse"]["messages"]) > 0
+
+def test_sms_intake():
+    res = client.post("/api/v1/sms/intake", json={
+        "From": "+919876543210",
+        "Body": "SOS ASV 5 PHC-SONAI"
+    })
+    assert res.status_code == 200
+    assert "Sanjeevini" in res.text
+    assert "SOS" in res.text

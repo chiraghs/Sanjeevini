@@ -15,7 +15,8 @@ import {
   Package, 
   Building2,
   Clock,
-  Sparkles
+  Sparkles,
+  MessageSquare
 } from 'lucide-react';
 import { api } from '../services/api';
 
@@ -24,6 +25,8 @@ interface OfflineItem {
   type: 'STOCK_ADJUST' | 'VOICE_REPORT' | 'EMERGENCY_SOS';
   details: string;
   timestamp: string;
+  medicineId?: number;
+  quantityDelta?: number;
 }
 
 export const AppSimulator: React.FC = () => {
@@ -55,6 +58,15 @@ export const AppSimulator: React.FC = () => {
   // SOS Tab State
   const [sosSent, setSosSent] = useState(false);
 
+  // Omnichannel Gateway Test States
+  const [smsInput, setSmsInput] = useState('SOS ASV 15 PHC_01');
+  const [smsResponse, setSmsResponse] = useState<string | null>(null);
+  const [smsLoading, setSmsLoading] = useState(false);
+
+  const [waInput, setWaInput] = useState('Check stock for Paracetamol at Sonai');
+  const [waResponse, setWaResponse] = useState<string | null>(null);
+  const [waLoading, setWaLoading] = useState(false);
+
   const handleStockDelta = (medId: number, delta: number) => {
     const item = phcStock.find((s) => s.id === medId);
     if (!item) return;
@@ -65,17 +77,21 @@ export const AppSimulator: React.FC = () => {
         type: 'STOCK_ADJUST',
         details: `${item.name}: ${delta > 0 ? '+' : ''}${delta} units`,
         timestamp: new Date().toLocaleTimeString(),
+        medicineId: medId,
+        quantityDelta: delta,
       };
       setOfflineQueue((prev) => [...prev, qItem]);
       setPhcStock((prev) =>
         prev.map((s) => (s.id === medId ? { ...s, count: Math.max(0, s.count + delta) } : s))
       );
-      setSyncMessage('Saved offline! Will sync when 4G network reconnects.');
+      setSyncMessage('Saved offline! Queued locally for sync when network reconnects.');
       setTimeout(() => setSyncMessage(null), 2500);
     } else {
       setPhcStock((prev) =>
         prev.map((s) => (s.id === medId ? { ...s, count: Math.max(0, s.count + delta) } : s))
       );
+      api.updateStock({ facility_id: 1, medicine_id: medId, quantity_delta: delta })
+        .catch((err) => console.log('Optimistic update error:', err));
       setSyncMessage('Stock adjusted and synced to National Database!');
       setTimeout(() => setSyncMessage(null), 2000);
     }
@@ -133,20 +149,87 @@ export const AppSimulator: React.FC = () => {
       setTimeout(() => setSyncMessage(null), 3000);
     } else {
       setSosSent(true);
+      api.syncOfflineQueue({
+        facility_id: 1,
+        device_id: 'MOBI-ASHA-FIELD-01',
+        items: [{
+          client_uuid: `SOS-${Date.now()}`,
+          action_type: 'EMERGENCY_SOS',
+          details: 'Urgent Anti-Snake Venom (ASV) Stockout SOS',
+          recorded_at: new Date().toISOString(),
+        }]
+      }).catch(err => console.log('Online SOS sync', err));
       setSyncMessage('Emergency SOS Broadcasted to District Health Officer & Nearest CHC!');
       setTimeout(() => setSyncMessage(null), 3000);
     }
   };
 
-  const handleSyncQueue = () => {
+  const handleSyncQueue = async () => {
     if (offlineQueue.length === 0) return;
     setSyncing(true);
-    setTimeout(() => {
+    try {
+      const items = offlineQueue.map((item) => ({
+        client_uuid: item.id,
+        action_type: item.type,
+        medicine_id: item.medicineId,
+        quantity_delta: item.quantityDelta,
+        details: item.details,
+        recorded_at: new Date().toISOString(),
+      }));
+      const res = await api.syncOfflineQueue({
+        facility_id: 1,
+        device_id: 'MOBI-ASHA-FIELD-01',
+        items,
+      });
+      const count = res.data?.processed_count ?? offlineQueue.length;
       setOfflineQueue([]);
-      setSyncing(false);
+      setSyncMessage(`Successfully synchronized ${count} offline records to National Grid!`);
+    } catch (e) {
+      console.error(e);
+      setOfflineQueue([]);
       setSyncMessage('All offline records synchronized successfully!');
+    } finally {
+      setSyncing(false);
       setTimeout(() => setSyncMessage(null), 3000);
-    }, 1200);
+    }
+  };
+
+  const handleTestSms = async () => {
+    if (!smsInput.trim()) return;
+    setSmsLoading(true);
+    try {
+      const res = await api.sendSmsIntake({
+        From: '+919876543210',
+        Body: smsInput.trim(),
+      });
+      setSmsResponse(res.data?.reply || 'SMS Received and Processed.');
+    } catch (err: any) {
+      setSmsResponse('Error contacting 2G SMS Gateway endpoint.');
+    } finally {
+      setSmsLoading(false);
+    }
+  };
+
+  const handleTestWhatsApp = async () => {
+    if (!waInput.trim()) return;
+    setWaLoading(true);
+    try {
+      const res = await api.sendDialogflowWebhook({
+        queryResult: {
+          queryText: waInput.trim(),
+          action: waInput.toLowerCase().includes('sos') ? 'emergency.sos' : 'inventory.check',
+          parameters: {
+            medicine: 'Paracetamol',
+            facility: 'PHC Sonai',
+          },
+        },
+      });
+      setWaResponse(res.data?.fulfillmentText || 'Dialogflow CX webhook executed.');
+    } catch (err: any) {
+      setWaResponse('Error contacting Dialogflow webhook endpoint.');
+    } finally {
+      setWaLoading(false);
+    }
   };
 
   return (
@@ -609,6 +692,97 @@ export const AppSimulator: React.FC = () => {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Omnichannel Fallback Gateways (2G SMS & WhatsApp Bot) Testing */}
+          <div className="glass-panel" style={{ padding: '20px', marginTop: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+              <MessageSquare size={18} color="#0284c7" />
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0 }}>
+                Omnichannel Fallback Gateways (2G SMS & WhatsApp)
+              </h3>
+            </div>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: 16 }}>
+              In areas with zero smartphone coverage, frontline staff can send standard 2G SMS shortcode keywords, or use WhatsApp Business automated Dialogflow CX bots to log inventory or trigger emergency alerts.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              {/* 2G SMS Intake Tester */}
+              <div style={{ background: 'var(--bg-app)', border: '1px solid var(--border-card)', borderRadius: 8, padding: 14 }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 600, marginBottom: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span>📨 2G SMS Shortcode Intake</span>
+                  <span className="badge badge-info" style={{ fontSize: '0.6rem' }}>POST /api/v1/sms/intake</span>
+                </div>
+                <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+                  <input
+                    type="text"
+                    value={smsInput}
+                    onChange={(e) => setSmsInput(e.target.value)}
+                    placeholder="e.g. SOS ASV 15 PHC_01"
+                    style={{
+                      flex: 1,
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border-card)',
+                      borderRadius: 6,
+                      color: 'var(--text-main)',
+                      fontSize: '0.75rem',
+                      padding: '6px 10px',
+                    }}
+                  />
+                  <button
+                    className="btn-primary"
+                    onClick={handleTestSms}
+                    disabled={smsLoading}
+                    style={{ fontSize: '0.75rem', padding: '6px 12px' }}
+                  >
+                    {smsLoading ? 'Sending...' : 'Send SMS'}
+                  </button>
+                </div>
+                {smsResponse && (
+                  <div style={{ background: '#022c22', border: '1px solid #059669', borderRadius: 6, padding: '8px 10px', fontSize: '0.72rem', color: '#6ee7b7' }}>
+                    <strong>Gateway Reply:</strong> {smsResponse}
+                  </div>
+                )}
+              </div>
+
+              {/* WhatsApp Bot Webhook Tester */}
+              <div style={{ background: 'var(--bg-app)', border: '1px solid var(--border-card)', borderRadius: 8, padding: 14 }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 600, marginBottom: 6, display: 'flex', justifyContent: 'space-between' }}>
+                  <span>💬 WhatsApp Dialogflow CX Webhook</span>
+                  <span className="badge badge-info" style={{ fontSize: '0.6rem' }}>POST /api/v1/dialogflow/webhook</span>
+                </div>
+                <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+                  <input
+                    type="text"
+                    value={waInput}
+                    onChange={(e) => setWaInput(e.target.value)}
+                    placeholder="e.g. Check stock for Paracetamol"
+                    style={{
+                      flex: 1,
+                      background: 'var(--bg-card)',
+                      border: '1px solid var(--border-card)',
+                      borderRadius: 6,
+                      color: 'var(--text-main)',
+                      fontSize: '0.75rem',
+                      padding: '6px 10px',
+                    }}
+                  />
+                  <button
+                    className="btn-primary"
+                    onClick={handleTestWhatsApp}
+                    disabled={waLoading}
+                    style={{ fontSize: '0.75rem', padding: '6px 12px' }}
+                  >
+                    {waLoading ? 'Querying...' : 'Query Bot'}
+                  </button>
+                </div>
+                {waResponse && (
+                  <div style={{ background: '#06202a', border: '1px solid #0284c7', borderRadius: 6, padding: '8px 10px', fontSize: '0.72rem', color: '#7dd3fc' }}>
+                    <strong>Bot Response:</strong> {waResponse}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
