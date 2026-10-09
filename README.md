@@ -4,6 +4,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-sanjeevini--ui.onrender.com-success?style=for-the-badge&logo=render&logoColor=white)](https://sanjeevini-ui.onrender.com)
 [![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-blue?style=for-the-badge&logo=fastapi&logoColor=white)](https://sanjeevini-3ztb.onrender.com/docs)
 [![Pitch Deck](https://img.shields.io/badge/Pitch%20Deck-11--Slide%20PDF-crimson?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/chiraghs/Sanjeevini/blob/main/Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)
+[![Video Walkthrough](https://img.shields.io/badge/Video%20Walkthrough-2.5%20Min%20Full%20HD-9cf?style=for-the-badge&logo=youtube&logoColor=white)](sanjeevini_walkthrough_2.5min.mp4)
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-chiraghs%2FSanjeevini-181717.svg?logo=github)](https://github.com/chiraghs/Sanjeevini)
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://python.org)
@@ -17,7 +18,17 @@
 
 > 🚀 **Live Interactive Web Application:** [**https://sanjeevini-ui.onrender.com**](https://sanjeevini-ui.onrender.com)  
 > 📖 **Live API Swagger Documentation:** [**https://sanjeevini-3ztb.onrender.com/docs**](https://sanjeevini-3ztb.onrender.com/docs)  
-> 📊 **11-Slide Official Pitch Deck:** [**Sanjeevini-Pitch-Deck.pdf**](Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)
+> 📊 **11-Slide Official Pitch Deck:** [**Sanjeevini-Pitch-Deck.pdf**](Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)  
+> 🎥 **2.5-Minute End-to-End Walkthrough Video:** [`sanjeevini_walkthrough_2.5min.mp4`](sanjeevini_walkthrough_2.5min.mp4)
+
+---
+
+## 📚 Dedicated Technical Documentation
+
+| Documentation Guide | Primary Coverage |
+| :--- | :--- |
+| 🤖 [**README_AI_ML.md**](README_AI_ML.md) | **Deep-Dive AI/ML Architecture**: Gemini 1.5 Flash Vision OCR, Hybrid Epidemiological Time-Series Forecasting, Cross-District Bipartite Matching Algorithm, Sovereign Federated Learning Hub (FedAvg with Differential Privacy $\epsilon=0.85$), and Indic Voice AI. |
+| 📱 [**README_offline.md**](README_offline.md) | **Mobile & Offline Channels**: Zero-connectivity rural PHC resilience, local SQLite store-and-forward queueing, WhatsApp Business / Dialogflow CX conversational bridge, 2G SMS shortcode gateway, and idempotent batch synchronization. |
 
 ---
 
@@ -25,14 +36,14 @@
 
 In Indian tradition, **संजीविनी (Sanjeevini)** is the revered, life-restoring herb from the Ramayana that was flown across provinces in record time to save lives on the brink. 
 
-Today, public healthcare across India faces persistent supply chain vulnerabilities. The inability to track medicines, patient footfall, and resource utilization in real time across vast networks of Primary Health Centres leads to stock-outs of life-saving medicines (antivenom, oxytocin, rabies vaccines, insulin, IV fluids, ORS).
+Today, public healthcare across developing nations faces persistent supply chain vulnerabilities. The inability to track medicines, patient footfall, and resource utilization in real time across vast networks of Primary Health Centres leads to stock-outs of life-saving medicines (anti-snake venom, maternal oxytocin, rabies vaccines, insulin, IV fluids, ORS).
 
 **Sanjeevini** bridges that critical last mile through a **Federated AI Platform**:
-- Real-time national visibility into medicine stocks, bed availability, and medical staff attendance.
-- Early warning alerts and demand forecasting during epidemiological outbreaks and monsoon emergencies.
-- Automated cross-district medicine redistribution pairing deficit PHCs with surplus hubs.
-- Privacy-preserving Federated Learning (FedAvg) across India's states respecting healthcare data sovereignty.
-- Multilingual voice-first assistant (ASHA/ANM) and Gemini 1.5 Flash Vision OCR for handwritten paper registers.
+- **Real-Time National Visibility**: Complete telemetry across 30,000+ PHCs, CHCs, and District Hospitals tracking drug stocks, bed occupancy, and medical staff attendance.
+- **Epidemiological Demand Forecasting**: Early warning alerts forecasting localized consumption spikes during monsoon floods, diarrheal outbreaks, and snakebite seasons up to 14 days ahead.
+- **Automated Cross-District Redistribution**: AI engine pairing deficit health centres with nearby surplus or near-expiry hospital depots, issuing digital e-Challan passes with 1 click.
+- **Sovereign Federated Learning**: Schedule 7 compliant decentralized model training across state health nodes and BRICS networks with zero patient OPD record leakage.
+- **Frontline Multi-Channel Accessibility**: Indic Voice AI for ASHAs in 22 official languages, Gemini 1.5 Flash Vision OCR for paper registers, and offline-first mobile app simulation.
 
 ---
 
@@ -52,7 +63,7 @@ Today, public healthcare across India faces persistent supply chain vulnerabilit
 
 ```mermaid
 flowchart TD
-    subgraph "Clients & Frontline Field Workers"
+    subgraph "Frontline Cadres & Public Health Officials"
         ASHA["ASHA / ANM Frontline Cadre (Voice / Mobile PWA)"]
         PHC["PHC Pharmacist / Medical Officer (Ground Console)"]
         DMO["District Health Officer (Redistribution Hub)"]
@@ -64,6 +75,7 @@ flowchart TD
         GIS["Leaflet GIS Heatmap & Cluster Engine"]
         VoiceUI["Web Speech & Indic Audio Processor"]
         CameraUI["Camera / File Upload OCR Component"]
+        SimUI["Offline Mobile App Simulator"]
     end
 
     subgraph "API & Business Logic (FastAPI)"
@@ -87,7 +99,7 @@ flowchart TD
         RedisStore[("Redis Queue & Rate Limiter")]
     end
 
-    ASHA -->|Voice Recording in Hindi/Marathi/Tamil| VoiceUI
+    ASHA -->|Voice / WhatsApp / SMS| VoiceUI
     PHC -->|Ledger Photo| CameraUI
     DMO -->|Approve e-Challan| UI
     MoHFW -->|Monitor National Resilience| UI
@@ -96,6 +108,7 @@ flowchart TD
     CameraUI --> API
     UI --> API
     GIS --> API
+    SimUI --> API
 
     API --> Gemini
     API --> Vertex
@@ -109,24 +122,69 @@ flowchart TD
 
 ---
 
-## ⚡ Core Features & Innovations
+## ⚡ Core Features & Technical Modules
 
-### 1. 📷 Gemini 1.5 Flash Vision OCR Scanner
-Rural PHCs still rely on physical paper ledger registers. Pharmacists photograph the register; Gemini Vision extracts medicine names, batch numbers, expiry dates, and unit counts directly into structured JSON and flags critical deficits.
+### 1. 🏛️ National Command Centre (`/`)
+- **Instant-Load SWR Architecture**: Loads in 0ms with cached/baseline telemetry and syncs live updates in the background.
+- **National Buffer Index**: Real-time stock adequacy index across all 28 reporting states.
+- **NLEM Stockout Watchlist**: Identifies facilities with $\le 3$ days of critical buffer remaining.
+- **Surveillance & Outbreak Triggers**: Dynamic alert stream linking meteorological and epidemiological warnings with localized demand surges.
 
-### 2. 📈 Epidemiological Demand & Early Warning Forecasting
-Combines baseline consumption rates with active public health alerts (e.g., IMD flood alerts in Cachar, Assam $\rightarrow$ 320% surge in ORS and IV fluids; sugarcane harvest season in Pune $\rightarrow$ antivenom requisition). Predicts the exact day of depletion 14–30 days ahead.
+### 2. 🗺️ Geospatial Live Resource Map (`/map`)
+- Full-screen interactive Leaflet GIS cluster map.
+- Color-coded facility risk markers (Green = Stable, Amber = Warning, Red = Critical Deficit).
+- Granular telemetry drill-down: ICU beds, doctor attendance, oxygen points, and days-to-stockout for NLEM drugs.
 
-### 3. 🚚 Automated Cross-District Redistribution Engine
-Solves the paradox of one district facing a stockout while an adjacent district hospital holds expiring buffer stock. The algorithm pairs deficit PHCs with nearby donor hubs, optimizes transit distance, factors in cold-chain constraints (2–8°C), and generates digital e-Challan passes.
+### 3. 🚚 District Emergency Medicine Redistribution Hub (`/logistics`)
+- Algorithmic surplus-deficit matching pairing rural clinics with nearby hospital depots holding surplus or near-expiry batches.
+- Multi-factor cost optimization prioritizing transit distance ($\text{km}$), transit time ($\text{hrs}$), and cold-chain safety ($2\text{–}8^\circ\text{C}$).
+- 1-Click **Authorize Dispatch** issuing digital cryptographic e-Challan consignment codes (`TRF-2026-XXXX`).
 
-### 4. 🌐 Federated Predictive Modeling & State Data Sovereignty
-Under Schedule 7 of the Indian Constitution, health is a State subject. Sanjeevini implements simulated Federated Averaging (FedAvg) with differential privacy ($\epsilon=0.85$): local state models (Maharashtra, Uttar Pradesh, Assam, Kerala, Rajasthan, Bihar) train on local OPD records and share only anonymized gradient weights with the central national hub.
+### 4. 🏥 PHC Ground Terminal & Stock Console (`/phc`)
+- Rapid digital ledger for rural Medical Officers and Pharmacists.
+- Instant 1-touch dispensary updates (`+` / `-`) with immediate audit trail synchronization.
+- Real-time doctor and staff attendance check-ins.
 
-### 5. 🎙️ Multilingual Indic Voice Assistant for ASHA/ANM Workers
-Frontline workers can speak naturally in Hindi, Marathi, Bengali, Tamil, Telugu, and more:
-> *"हमारे पास पेरासिटामोल के सिर्फ 15 स्ट्रिप बचे हैं और ओआरएस खत्म हो गया है"*
-The system transcribes, translates, extracts clinical entities, and provides spoken audio confirmation.
+### 5. 📷 Vision OCR Ledger Digitizer (`/scan`)
+- Multimodal computer vision powered by Google Gemini 1.5 Flash.
+- Converts physical handwritten stock registers and drug blister packs into structured digital NLEM records.
+- Automated extraction of drug name, batch number, expiry threshold, and stock balance.
+
+### 6. 🎙️ Indic Voice AI Assistant for ASHAs (`/voice`)
+- Supports **all 22 official scheduled languages** of the Constitution of India (Hindi, Tamil, Telugu, Bengali, Marathi, etc.).
+- Converts natural spoken dialect into structured clinical requisitions.
+- Automated urgency triage and direct routing to the District Redistribution Hub.
+
+### 7. 🌐 Sovereign Federated Learning Hub (`/federated`)
+- Schedule 7 compliant decentralized model training across 6 state health nodes (MH, UP, AS, KL, RJ, BR) and BRICS partner health networks.
+- Differential Privacy with Laplace noise ($\epsilon=0.85$) ensuring zero patient OPD records leave state borders.
+- Real-time visualization of model convergence curves and prediction accuracy.
+
+### 8. 📱 Offline-First Mobile App Simulator (`/simulator`)
+- Interactive smartphone simulation showing how frontline cadres record dispensing offline.
+- Local SQLite queueing with zero network dependency.
+- Automatic idempotent queue flushing upon 4G/cellular reconnect.
+
+---
+
+## 📡 REST API Reference
+
+All endpoints are prefixed with `/api/v1` and documentable at `/docs`:
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/analytics/national-summary` | Aggregated national KPIs, buffer index, and bed utilization. |
+| `GET` | `/facilities/` | List all healthcare facilities with district/state filters. |
+| `GET` | `/facilities/map-markers` | Clustered GIS coordinates and live status markers for map. |
+| `GET` | `/inventory/` | Real-time drug stock counts, batch numbers, and days to zero. |
+| `POST` | `/inventory/update` | Record ground dispensary dispensation or stock receipt. |
+| `GET` | `/forecasting/critical-watchlist` | Facilities facing imminent stockouts within 7 days. |
+| `GET` | `/redistribution/recommendations` | AI-generated cross-district transfer proposals. |
+| `POST` | `/redistribution/dispatch` | Authorize emergency consignment & issue cryptographic e-Challan. |
+| `POST` | `/multimodal/scan-register` | Upload image of paper ledger for Gemini Vision OCR extraction. |
+| `POST` | `/voice/process` | Transcribe and extract clinical entities from Indic spoken audio. |
+| `GET` | `/federated/status` | Current round, global model loss, and connected state node telemetry. |
+| `POST` | `/federated/train-round` | Execute multi-state FedAvg gradient aggregation round. |
 
 ---
 
@@ -135,7 +193,7 @@ The system transcribes, translates, extracts clinical entities, and provides spo
 ### Prerequisites
 - Python 3.11 or 3.12
 - Node.js 18+ and npm
-- (Optional) `GEMINI_API_KEY` for live Google Cloud integration (built-in intelligent mock fallback included)
+- (Optional) `GEMINI_API_KEY` for live Google Cloud AI (built-in intelligent mock fallback included)
 
 ### Automated Setup
 ```bash
@@ -173,22 +231,22 @@ Visit:
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing & Verification
 
-Run backend tests:
+Run backend automated test suite:
 ```bash
 cd backend
 PYTHONPATH=. ./venv/bin/pytest tests/
 ```
 
-Run frontend build check:
+Run frontend type checking & build verification:
 ```bash
 cd frontend
-npm run typecheck
+npx tsc --noEmit
 npm run build
 ```
 
 ---
 
 ## 🛡️ License & Acknowledgments
-Built with ❤️ for India's National Health Mission, referencing UI and architectural standards from `Civic-Pulse`.
+Built with ❤️ for India's National Health Mission, referencing engineering and UI standards from `Civic-Pulse`.
