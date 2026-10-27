@@ -4,6 +4,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-sanjeevini--ui.onrender.com-success?style=for-the-badge&logo=render&logoColor=white)](https://sanjeevini-ui.onrender.com)
 [![API Docs](https://img.shields.io/badge/API%20Docs-Swagger%20UI-blue?style=for-the-badge&logo=fastapi&logoColor=white)](https://sanjeevini-3ztb.onrender.com/docs)
 [![Pitch Deck](https://img.shields.io/badge/Pitch%20Deck-11--Slide%20PDF-crimson?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)
+[![7-Min Pitch](https://img.shields.io/badge/Pitch%20Presentation-7--Min%20Script-purple?style=for-the-badge&logo=speakerdeck&logoColor=white)](PITCH_PRESENTATION_7MIN.md)
 [![Video Walkthrough](https://img.shields.io/badge/Video%20Walkthrough-2.5%20Min%20Full%20HD-9cf?style=for-the-badge&logo=youtube&logoColor=white)](sanjeevini_walkthrough_2.5min.mp4)
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-chiraghs%2FSanjeevini-181717.svg?logo=github)](https://github.com/chiraghs/Sanjeevini)
@@ -19,16 +20,18 @@
 > 🚀 **Live Interactive Web Application:** [**https://sanjeevini-ui.onrender.com**](https://sanjeevini-ui.onrender.com)  
 > 📖 **Live API Swagger Documentation:** [**https://sanjeevini-3ztb.onrender.com/docs**](https://sanjeevini-3ztb.onrender.com/docs)  
 > 📊 **11-Slide Official Pitch Deck:** [**Sanjeevini-Pitch-Deck.pdf**](Pitch-DECK/Sanjeevini-Pitch-Deck.pdf)  
+> 🎙️ **7-Minute Pitch Presentation & Script:** [**PITCH_PRESENTATION_7MIN.md**](PITCH_PRESENTATION_7MIN.md)  
 > 🎥 **2.5-Minute End-to-End Walkthrough Video:** [`sanjeevini_walkthrough_2.5min.mp4`](sanjeevini_walkthrough_2.5min.mp4)
 
 ---
 
 ## 📚 Dedicated Technical Guides
 
-For deeper, subsystem-level engineering architecture, consult the companion guides:
+For deeper, subsystem-level engineering architecture and presentation scripts, consult the companion guides:
 
 | Documentation Guide | Primary Coverage |
 | :--- | :--- |
+| 🎙️ [**PITCH_PRESENTATION_7MIN.md**](PITCH_PRESENTATION_7MIN.md) | **7-Minute Pitch Presentation & Script**: Minute-by-minute speaking script, slide choreography for the 11-slide deck, and 5-question judge Q&A defense strategy. |
 | 🤖 [**README_AI_ML.md**](README_AI_ML.md) | **Deep-Dive AI/ML Architecture**: Gemini 1.5 Flash Vision OCR, Hybrid Epidemiological Time-Series Forecasting (SEIR + ARIMA), Cross-District Bipartite Matching Algorithm, Sovereign Federated Learning Hub ($\text{FedAvg}$ with Differential Privacy $\epsilon=0.85$), and Indic Voice AI. |
 | 📱 [**README_offline.md**](README_offline.md) | **Mobile & Offline Channels**: Zero-connectivity rural PHC resilience, local SQLite store-and-forward queueing, WhatsApp Business / Dialogflow CX conversational bridge, 2G SMS shortcode gateway, and idempotent batch synchronization. |
 
