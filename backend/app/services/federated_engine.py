@@ -11,7 +11,8 @@ class FederatedCoordinator:
         {"code": "AS", "name": "Assam", "phc_count": 1014, "samples": 21000},
         {"code": "KL", "name": "Kerala", "phc_count": 912, "samples": 34000},
         {"code": "RJ", "name": "Rajasthan", "phc_count": 2180, "samples": 49000},
-        {"code": "BR", "name": "Bihar", "phc_count": 2240, "samples": 53000}
+        {"code": "BR", "name": "Bihar", "phc_count": 2240, "samples": 53000},
+        {"code": "KA", "name": "Karnataka", "phc_count": 2350, "samples": 51000}
     ]
 
     BRICS_NODES = [

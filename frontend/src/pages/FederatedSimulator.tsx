@@ -41,7 +41,8 @@ const DEFAULT_FEDERATED: FederatedStatus = {
     { state_code: 'AS', state_name: 'Assam', active_phcs: 1048, samples_trained: 26000, local_loss: 0.1584, local_accuracy: 0.949, privacy_budget_consumed: 0.85, last_gradient_sync: 'Just now', status: 'ONLINE_SYNCED' },
     { state_code: 'KL', state_name: 'Kerala', active_phcs: 920, samples_trained: 31000, local_loss: 0.1498, local_accuracy: 0.962, privacy_budget_consumed: 0.90, last_gradient_sync: 'Just now', status: 'ONLINE_SYNCED' },
     { state_code: 'RJ', state_name: 'Rajasthan', active_phcs: 2150, samples_trained: 49000, local_loss: 0.1685, local_accuracy: 0.941, privacy_budget_consumed: 0.84, last_gradient_sync: 'Just now', status: 'ONLINE_SYNCED' },
-    { state_code: 'BR', state_name: 'Bihar', active_phcs: 2480, samples_trained: 58000, local_loss: 0.1712, local_accuracy: 0.935, privacy_budget_consumed: 0.81, last_gradient_sync: 'Just now', status: 'ONLINE_SYNCED' }
+    { state_code: 'BR', state_name: 'Bihar', active_phcs: 2480, samples_trained: 58000, local_loss: 0.1712, local_accuracy: 0.935, privacy_budget_consumed: 0.81, last_gradient_sync: 'Just now', status: 'ONLINE_SYNCED' },
+    { state_code: 'KA', state_name: 'Karnataka', active_phcs: 2350, samples_trained: 51000, local_loss: 0.1542, local_accuracy: 0.958, privacy_budget_consumed: 0.86, last_gradient_sync: 'Just now', status: 'ONLINE_SYNCED' }
   ],
   training_history: [
     { round: 1, global_loss: 0.48, global_accuracy: 0.72, participating_nodes: 6 },

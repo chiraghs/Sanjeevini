@@ -65,68 +65,83 @@ FACILITIES_DATA = [
     # Rajasthan
     {"name": "PHC Sanganer", "code": "RJ-JAI-PHC-01", "type": "PHC", "state": "Rajasthan", "district": "Jaipur", "lat": 26.8142, "lng": 75.7712, "beds": 12, "occ": 9, "icu": 0, "cold": True},
     {"name": "CHC Bassi", "code": "RJ-JAI-CHC-01", "type": "CHC", "state": "Rajasthan", "district": "Jaipur", "lat": 26.8341, "lng": 76.0412, "beds": 40, "occ": 25, "icu": 3, "cold": True},
-    {"name": "PHC Baytu Desert Outpost", "code": "RJ-BAR-PHC-01", "type": "PHC", "state": "Rajasthan", "district": "Barmer", "lat": 25.8941, "lng": 71.7712, "beds": 6, "occ": 5, "icu": 0, "cold": True}
+    {"name": "PHC Baytu Desert Outpost", "code": "RJ-BAR-PHC-01", "type": "PHC", "state": "Rajasthan", "district": "Barmer", "lat": 25.8941, "lng": 71.7712, "beds": 6, "occ": 5, "icu": 0, "cold": True},
+
+    # Karnataka (10 Facilities across 6 Key Health Districts)
+    {"name": "Victoria Hospital (BMCRI)", "code": "KA-BLR-DH-01", "type": "DH", "state": "Karnataka", "district": "Bengaluru Urban", "lat": 12.9644, "lng": 77.5746, "beds": 850, "occ": 720, "icu": 65, "cold": True},
+    {"name": "PHC Anekal", "code": "KA-BLR-PHC-01", "type": "PHC", "state": "Karnataka", "district": "Bengaluru Urban", "lat": 12.7108, "lng": 77.6974, "beds": 12, "occ": 10, "icu": 0, "cold": True},
+    {"name": "K.R. Hospital (MMCRI)", "code": "KA-MYS-DH-01", "type": "DH", "state": "Karnataka", "district": "Mysuru", "lat": 12.3168, "lng": 76.6492, "beds": 600, "occ": 510, "icu": 40, "cold": True},
+    {"name": "PHC Bilikere", "code": "KA-MYS-PHC-01", "type": "PHC", "state": "Karnataka", "district": "Mysuru", "lat": 12.3382, "lng": 76.3985, "beds": 8, "occ": 6, "icu": 0, "cold": True},
+    {"name": "PHC Somwarpet Tribal Outpost", "code": "KA-KOD-PHC-01", "type": "PHC", "state": "Karnataka", "district": "Kodagu", "lat": 12.5976, "lng": 75.8647, "beds": 8, "occ": 7, "icu": 0, "cold": True},
+    {"name": "Wenlock District Hospital", "code": "KA-DKN-DH-01", "type": "DH", "state": "Karnataka", "district": "Dakshina Kannada", "lat": 12.8681, "lng": 74.8427, "beds": 500, "occ": 410, "icu": 35, "cold": True},
+    {"name": "CHC Puttur", "code": "KA-DKN-CHC-01", "type": "CHC", "state": "Karnataka", "district": "Dakshina Kannada", "lat": 12.7663, "lng": 75.2045, "beds": 35, "occ": 24, "icu": 3, "cold": True},
+    {"name": "VIMS District Hospital", "code": "KA-BAL-DH-01", "type": "DH", "state": "Karnataka", "district": "Ballari", "lat": 15.1582, "lng": 76.9248, "beds": 450, "occ": 380, "icu": 30, "cold": True},
+    {"name": "PHC Kudligi Mining Outpost", "code": "KA-BAL-PHC-01", "type": "PHC", "state": "Karnataka", "district": "Ballari", "lat": 14.9012, "lng": 76.3891, "beds": 8, "occ": 7, "icu": 0, "cold": True},
+    {"name": "CHC Thirthahalli", "code": "KA-SHI-CHC-01", "type": "CHC", "state": "Karnataka", "district": "Shivamogga", "lat": 13.6934, "lng": 75.2412, "beds": 40, "occ": 28, "icu": 4, "cold": True}
 ]
 
 def seed_database():
     Base.metadata.create_all(bind=engine)
     db: Session = SessionLocal()
     
-    # Check if already seeded
-    if db.query(Facility).count() > 0:
-        print("[seed] Database already contains facilities. Skipping seed.")
-        db.close()
-        return
-
-    print("[seed] Seeding medicines...")
+    # 1. Seed medicines if missing
+    existing_meds = {m.code: m for m in db.query(Medicine).all()}
     med_map = {}
     for m in MEDICINES_DATA:
-        med = Medicine(
-            code=m["code"],
-            name=m["name"],
-            generic_name=m["generic"],
-            category=m["category"],
-            dosage_form=m["dosage"],
-            unit=m["unit"],
-            critical_days_threshold=m["critical"],
-            storage_temp_c=m["temp"],
-            requires_cold_chain=m["cold"],
-            is_vital=m["vital"]
-        )
-        db.add(med)
-        db.flush()
-        med_map[m["code"]] = med
+        if m["code"] in existing_meds:
+            med_map[m["code"]] = existing_meds[m["code"]]
+        else:
+            med = Medicine(
+                code=m["code"],
+                name=m["name"],
+                generic_name=m["generic"],
+                category=m["category"],
+                dosage_form=m["dosage"],
+                unit=m["unit"],
+                critical_days_threshold=m["critical"],
+                storage_temp_c=m["temp"],
+                requires_cold_chain=m["cold"],
+                is_vital=m["vital"]
+            )
+            db.add(med)
+            db.flush()
+            med_map[m["code"]] = med
 
-    print("[seed] Seeding facilities...")
-    facilities = []
+    # 2. Seed facilities if missing
+    existing_facs = {f.code: f for f in db.query(Facility).all()}
+    new_facilities = []
+    
     for f in FACILITIES_DATA:
-        fac = Facility(
-            code=f["code"],
-            name=f["name"],
-            facility_type=f["type"],
-            state=f["state"],
-            district=f["district"],
-            latitude=f["lat"],
-            longitude=f["lng"],
-            total_beds=f["beds"],
-            occupied_beds=f["occ"],
-            icu_beds=f.get("icu", 0),
-            occupied_icu=max(0, f.get("icu", 0) - 1),
-            oxygen_points=max(2, int(f["beds"] * 0.4)),
-            has_power_backup=True,
-            has_cold_chain=f["cold"],
-            cold_chain_functional=True,
-            cold_chain_temp_c=4.2 if f["cold"] else 24.0,
-            contact_person="Medical Officer in Charge",
-            contact_phone=f"+91 {random.randint(7000000000, 9999999999)}"
-        )
-        db.add(fac)
-        db.flush()
-        facilities.append(fac)
+        if f["code"] not in existing_facs:
+            fac = Facility(
+                code=f["code"],
+                name=f["name"],
+                facility_type=f["type"],
+                state=f["state"],
+                district=f["district"],
+                latitude=f["lat"],
+                longitude=f["lng"],
+                total_beds=f["beds"],
+                occupied_beds=f["occ"],
+                icu_beds=f.get("icu", 0),
+                occupied_icu=max(0, f.get("icu", 0) - 1),
+                oxygen_points=max(2, int(f["beds"] * 0.4)),
+                has_power_backup=True,
+                has_cold_chain=f["cold"],
+                cold_chain_functional=True,
+                cold_chain_temp_c=4.2 if f["cold"] else 24.0,
+                contact_person="Medical Officer in Charge",
+                contact_phone=f"+91 {random.randint(7000000000, 9999999999)}"
+            )
+            db.add(fac)
+            db.flush()
+            new_facilities.append(fac)
 
-    print("[seed] Generating realistic inventory balances...")
+    print(f"[seed] Added {len(new_facilities)} new facilities.")
+
+    # 3. Seed inventory for new facilities
     now = datetime.datetime.utcnow()
-    for fac in facilities:
+    for fac in new_facilities:
         for med in med_map.values():
             # Seed deliberate critical deficits in specific PHCs for live demo
             is_crisis_target = (
@@ -134,7 +149,10 @@ def seed_database():
                 (fac.name == "PHC Paud" and "Anti-Snake" in med.name) or
                 (fac.name == "PHC Kanti" and "Paracetamol" in med.name) or
                 (fac.name == "PHC Baytu Desert Outpost" and "Saline" in med.name) or
-                (fac.name == "FHC Meppadi" and "Oxytocin" in med.name)
+                (fac.name == "FHC Meppadi" and "Oxytocin" in med.name) or
+                (fac.name == "PHC Somwarpet Tribal Outpost" and "Anti-Snake" in med.name) or
+                (fac.name == "PHC Anekal" and "Oxytocin" in med.name) or
+                (fac.name == "PHC Kudligi Mining Outpost" and "Paracetamol" in med.name)
             )
             
             is_surplus_depot = (
@@ -142,7 +160,7 @@ def seed_database():
             )
 
             if is_crisis_target:
-                current_stock = random.randint(4, 18)
+                current_stock = random.randint(4, 16)
                 burn_rate = round(random.uniform(5.0, 9.0), 1)
             elif is_surplus_depot:
                 current_stock = random.randint(600, 2500)
@@ -179,7 +197,8 @@ def seed_database():
             )
             db.add(inv)
 
-    print("[seed] Seeding active health alerts...")
+    # 4. Seed active health alerts (including Karnataka)
+    existing_alert_titles = {a.title for a in db.query(HealthAlert).all()}
     alerts = [
         HealthAlert(
             title="Post-Monsoon Dengue Vector Spike",
@@ -224,18 +243,41 @@ def seed_database():
             description="FHC Meppadi reports 5 ampoules remaining with 3 high-risk deliveries scheduled this weekend.",
             ai_mitigation_plan="Requisition 50 cold-chain ampoules from General Hospital Ernakulam / Sulthan Bathery CHC.",
             is_active=True
+        ),
+        HealthAlert(
+            title="Western Ghats Viper Surge & KFD Surveillance",
+            alert_type="STOCKOUT_RISK",
+            severity="CRITICAL",
+            state="Karnataka",
+            district="Kodagu",
+            disease_type="Russell's Viper & KFD",
+            description="Coffee plantation harvest in Somwarpet and Virajpet taluks triggered 22 acute snakebite emergency admissions in 48 hours. PHC Somwarpet ASV stocks depleted to 8 vials.",
+            ai_mitigation_plan="Approve emergency cross-transfer of 40 ASV polyvalent vials from K.R. Hospital (MMCRI) Mysuru via SH-88 within 2 hours. Deploy cold-chain transport van.",
+            is_active=True
+        ),
+        HealthAlert(
+            title="Bengaluru Peri-Urban Vector Surge",
+            alert_type="OUTBREAK_SURGE",
+            severity="HIGH",
+            state="Karnataka",
+            district="Bengaluru Urban",
+            disease_type="Dengue Serotype-2",
+            description="Rapid monsoon pool stagnation in Anekal and Sarjapur peri-urban belt. PHC Anekal reports 400% surge in pediatric dehydration footfall.",
+            ai_mitigation_plan="Requisition 2,500 ORS sachets and 500 Paracetamol IV infusions from Victoria Hospital BMCRI central stores.",
+            is_active=True
         )
     ]
     for a in alerts:
-        db.add(a)
+        if a.title not in existing_alert_titles:
+            db.add(a)
 
-    print("[seed] Seeding sample in-transit redistribution transfer...")
-    # Find PHC Paud and Aundh DH
+    # 5. Seed sample in-transit redistribution transfers
+    existing_transfers = {t.transfer_code for t in db.query(RedistributionTransfer).all()}
     phc_paud = db.query(Facility).filter(Facility.name == "PHC Paud").first()
     aundh_dh = db.query(Facility).filter(Facility.name == "Aundh District Hospital").first()
     asv_med = db.query(Medicine).filter(Medicine.code == "MED-ASV-10ML").first()
     
-    if phc_paud and aundh_dh and asv_med:
+    if phc_paud and aundh_dh and asv_med and "TRF-20260930-ASV91" not in existing_transfers:
         sample_transfer = RedistributionTransfer(
             transfer_code="TRF-20260930-ASV91",
             source_facility_id=aundh_dh.id,
@@ -256,6 +298,31 @@ def seed_database():
             dispatch_date=now - datetime.timedelta(minutes=35)
         )
         db.add(sample_transfer)
+
+    # Karnataka Active Transfer: K.R. Hospital Mysuru -> PHC Somwarpet Kodagu
+    phc_somwarpet = db.query(Facility).filter(Facility.name == "PHC Somwarpet Tribal Outpost").first()
+    kr_hospital = db.query(Facility).filter(Facility.name == "K.R. Hospital (MMCRI)").first()
+    if phc_somwarpet and kr_hospital and asv_med and "TRF-20261028-KA-ASV01" not in existing_transfers:
+        sample_transfer_ka = RedistributionTransfer(
+            transfer_code="TRF-20261028-KA-ASV01",
+            source_facility_id=kr_hospital.id,
+            destination_facility_id=phc_somwarpet.id,
+            medicine_id=asv_med.id,
+            quantity=40,
+            batch_no="BCH-2024-582",
+            urgency="EMERGENCY",
+            status="IN_TRANSIT",
+            distance_km=88.4,
+            estimated_transit_hours=1.8,
+            cold_chain_required=True,
+            vehicle_no="KA-09-G-4412 (Arogya Cold Van)",
+            driver_name="Manjunath Gowda",
+            driver_phone="+91 98450 23114",
+            temp_log_c=3.8,
+            approval_notes="Priority emergency dispatch cleared by DMO Mysuru & Kodagu Health Directorate.",
+            dispatch_date=now - datetime.timedelta(minutes=45)
+        )
+        db.add(sample_transfer_ka)
 
     db.commit()
     db.close()

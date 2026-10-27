@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { 
   ShieldCheck, 
@@ -25,6 +25,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ activeRole, setActiveRole, alertsCount = 4 }) => {
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     return (localStorage.getItem('sanjeevini_theme') as 'dark' | 'light') || 'light';
   });
@@ -114,23 +115,40 @@ export const Navbar: React.FC<NavbarProps> = ({ activeRole, setActiveRole, alert
             </div>
           </Link>
 
-          {/* Role Switcher */}
+          {/* 7-Tier Healthcare Hierarchy Switcher */}
           <select
             value={activeRole}
-            onChange={(e) => setActiveRole(e.target.value)}
+            onChange={(e) => {
+              const role = e.target.value;
+              setActiveRole(role);
+              if (role === 'national') navigate('/');
+              else if (role === 'district') navigate('/logistics');
+              else if (role === 'phc') navigate('/phc');
+            }}
+            title="Healthcare Administrative & Delivery Hierarchy"
             style={{
               background: 'var(--bg-app)',
               color: 'var(--text-main)',
               border: '1px solid var(--border-card)',
-              borderRadius: 4,
-              padding: '4px 6px',
-              fontSize: '0.75rem',
-              cursor: 'pointer'
+              borderRadius: 6,
+              padding: '4px 8px',
+              fontSize: '0.74rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              maxWidth: 240,
             }}
           >
-            <option value="national">MoHFW National</option>
-            <option value="district">District DMO</option>
-            <option value="phc">PHC Officer</option>
+            <optgroup label="🏛️ 1. Administrative Hierarchy (Governance & Funds)">
+              <option value="national">🏛️ Central: MoHFW (Active)</option>
+              <option value="state" disabled>🏛️ State: Dept of Health & FW (Locked)</option>
+              <option value="district">🏛️ District: DMO / CMO (Active)</option>
+            </optgroup>
+            <optgroup label="🏥 2. Healthcare Delivery Hierarchy (Care & Facilities)">
+              <option value="dh" disabled>🏥 District Hospital (DH) • 1.5M-3M Pop (Locked)</option>
+              <option value="chc" disabled>🏥 Community Health Center (CHC) • 80k-120k Pop (Locked)</option>
+              <option value="phc">🏥 Primary Health Center (PHC) • 20k-30k Pop (Active)</option>
+              <option value="hwc" disabled>🏥 Sub-Center (SC) / HWC • 3k-5k Pop (Locked)</option>
+            </optgroup>
           </select>
 
           {/* Language Selector */}
