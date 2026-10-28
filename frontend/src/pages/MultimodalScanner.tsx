@@ -19,15 +19,31 @@ export const MultimodalScanner: React.FC = () => {
     }
   };
 
+  const handleLoadSamplePhoto = () => {
+    setPreviewUrl('/sample_ledger.jpg');
+    setScanResult(null);
+    setCommitted(false);
+  };
+
   const handleSimulateDemoScan = async () => {
     setIsScanning(true);
     setScanResult(null);
     setCommitted(false);
 
     try {
-      const blob = new Blob(['sample-register-image'], { type: 'image/jpeg' });
+      if (!previewUrl) {
+        setPreviewUrl('/sample_ledger.jpg');
+      }
+      let fileToUpload: Blob;
+      if (selectedFile) {
+        fileToUpload = selectedFile;
+      } else {
+        const response = await fetch('/sample_ledger.jpg');
+        fileToUpload = await response.blob();
+      }
+
       const formData = new FormData();
-      formData.append('file', blob, 'phc_cachar_daily_register.jpg');
+      formData.append('file', fileToUpload, 'phc_dispensary_stock_register.jpg');
       formData.append('facility_id', '1');
 
       const res = await api.scanRegister(formData);
@@ -100,6 +116,16 @@ export const MultimodalScanner: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', gap: 10 }}>
+            <button
+              className="btn-outline"
+              type="button"
+              onClick={handleLoadSamplePhoto}
+              style={{ fontSize: '0.8rem', whiteSpace: 'nowrap' }}
+              title="Preload sample government stock register image for quick demonstration"
+            >
+              <FileText size={14} />
+              <span>Load Sample Photo</span>
+            </button>
             <button
               className="btn-primary"
               style={{ flex: 1 }}
